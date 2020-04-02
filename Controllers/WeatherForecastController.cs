@@ -13,7 +13,7 @@ namespace ms_pre_agendamiento.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-            "Frio", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Calido", "Sweltering", "Scorching"
+            "FREEZING", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "HOT", "Sweltering", "Scorching"
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
