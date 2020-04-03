@@ -1,13 +1,3 @@
-variables:
-  
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '190aab04-bf23-42ec-942f-494f6d6f6710'
-  imageRepository: 'mspreagendamiento'
-  containerRegistry: 'preagendamiento.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
-  tag: '$(Build.BuildId)'
-  imagePullSecret: 'preagendamiento210949f5-auth'
-
 apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
@@ -21,7 +11,7 @@ spec:
     spec:
       containers:
         - name: mspreagendamiento 
-          image: preagendamiento.azurecr.io/mspreagendamiento::$(tag)
+          image: preagendamiento.azurecr.io/mspreagendamiento:latest
           ports:
           - containerPort: 80
 ---
