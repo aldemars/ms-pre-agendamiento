@@ -14,7 +14,7 @@ spec:
           image: preagendamiento.azurecr.io/mspreagendamiento:latest
           ports:
           - containerPort: 80
----latest
+---
 apiVersion: v1
 kind: Service
 metadata:
