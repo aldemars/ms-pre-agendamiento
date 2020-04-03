@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: mspreagendamiento 
-          image: preagendamiento.azurecr.io/mspreagendamiento:87
+          image: preagendamiento.azurecr.io/mspreagendamiento:latest
           ports:
           - containerPort: 80
 ---
