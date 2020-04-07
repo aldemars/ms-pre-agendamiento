@@ -82,13 +82,13 @@ stages:
                   containers: |
                     $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: Deploy
+- stage: Deploy Dev
   displayName: Deploy Dev
   dependsOn: Build
 
   jobs:
-    - deployment: Deploy
-      displayName: Deploy
+    - deployment: Deploy Dev
+      displayName: Deploy Dev
       pool:
         vmImage: $(vmImageName)
       environment: 'mspreagendamiento-dev.kube-public'
