@@ -1,4 +1,4 @@
-apiVersion : apps/v1
+apiVersion : apps/v1beta1
 kind: Deployment
 metadata:
   name: mspreagendamiento 
@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: mspreagendamiento 
-          image: preagendamiento.azurecr.io/mspreagendamiento:97
+          image: preagendamiento.azurecr.io/mspreagendamiento:101
           ports:
           - containerPort: 80
 ---
