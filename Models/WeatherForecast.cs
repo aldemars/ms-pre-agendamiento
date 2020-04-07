@@ -1,8 +1,8 @@
 using System;
 
-namespace ms_pre_agendamiento
+namespace ms_pre_agendamiento.Models
 {
-    public class WeatherForecast
+    public  class WeatherForecast
     {
         public DateTime Date { get; set; }
 

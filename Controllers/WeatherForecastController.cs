@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento.Controllers
 {

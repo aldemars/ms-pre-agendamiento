@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ms_pre_agendamiento
+namespace ms_pre_agendamiento.Models
 {
     public class Calendar
     {
