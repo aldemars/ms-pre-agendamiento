@@ -1,6 +1,6 @@
 using System;
 
-namespace ms_pre_agendamiento
+namespace ms_pre_agendamiento.Models
 {
     public class ScheduledCalendarBlock
     {
