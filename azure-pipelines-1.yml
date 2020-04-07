@@ -82,12 +82,12 @@ stages:
                   containers: |
                     $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: Deploy Dev
+- stage: Deploy_Dev
   displayName: Deploy Dev
   dependsOn: Build
 
   jobs:
-    - deployment: Deploy Dev
+    - deployment: Deploy_Dev
       displayName: Deploy Dev
       pool:
         vmImage: $(vmImageName)
