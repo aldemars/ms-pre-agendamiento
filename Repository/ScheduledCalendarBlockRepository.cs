@@ -3,21 +3,14 @@ using System.Collections.Generic;
 
 namespace ms_pre_agendamiento
 {
-    public class ScheduledCalendarBlockRepository
+    public class ScheduledCalendarBlockRepository:IScheduledCalendarBlockRepository
     {
-        public List<ScheduledCalendarBlock> GetScheduledBlocks() {
-            List<ScheduledCalendarBlock> ScheduledBlocks = new List<ScheduledCalendarBlock>();
-            
-            ScheduledBlocks.Add(
-                new ScheduledCalendarBlock() {
-                    Date = DateTime.Now,
-                    From = 13,
-                    To = 14
-                }
-            );
-
-            return ScheduledBlocks;
-        }
-
+    public List<ScheduledCalendarBlock> GetScheduledBlocksMock()
+    {
+        return new List<ScheduledCalendarBlock>
+        {
+            new ScheduledCalendarBlock() {Date = DateTime.Now, HourFrom = 13, HourTo = 14}
+        };
+    }
     }
 }

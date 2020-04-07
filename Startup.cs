@@ -38,7 +38,7 @@ namespace ms_pre_agendamiento
 
             //TODO: Generate a HTTPS certificate
             //FIX ME: For run the app in local please comment the line below. Do not commit the line commented
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
