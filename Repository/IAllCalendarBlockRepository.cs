@@ -3,8 +3,8 @@ using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento
 {
-    public interface IScheduledCalendarBlockRepository
+    public interface IAllCalendarBlockRepository
     {
-        List<TimeSlot> GetScheduledBlocksMock();
+        List<TimeSlot> GetAllSlotsMock();
     }
 }

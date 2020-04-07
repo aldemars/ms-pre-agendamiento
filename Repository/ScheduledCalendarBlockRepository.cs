@@ -4,14 +4,14 @@ using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento
 {
-    public class ScheduledCalendarBlockRepository:IScheduledCalendarBlockRepository
+    public class ScheduledCalendarBlockRepository : IScheduledCalendarBlockRepository
     {
-    public List<ScheduledCalendarBlock> GetScheduledBlocksMock()
-    {
-        return new List<ScheduledCalendarBlock>
+        public List<TimeSlot> GetScheduledBlocksMock()
         {
-            new ScheduledCalendarBlock() {Date = DateTime.Now, HourFrom = 13, HourTo = 14}
-        };
-    }
+            return new List<TimeSlot>
+            {
+                new TimeSlot() {Date = DateTime.Now, HourFrom = 13, HourTo = 14}
+            };
+        }
     }
 }

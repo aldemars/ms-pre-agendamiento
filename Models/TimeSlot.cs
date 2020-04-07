@@ -2,7 +2,7 @@ using System;
 
 namespace ms_pre_agendamiento.Models
 {
-    public class ScheduledCalendarBlock
+    public class TimeSlot
     {
         public DateTime Date { get; set; }
 

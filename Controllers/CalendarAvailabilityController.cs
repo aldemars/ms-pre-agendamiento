@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento.Controllers
 {
@@ -18,12 +19,9 @@ namespace ms_pre_agendamiento.Controllers
         }
         
         [HttpGet]
-        public IEnumerable<int> Get()
+        public IEnumerable<TimeSlot> Get()
         {
-            return new[]
-            {
-                calendarAvailabilityService.GetBlocksSize()
-            };
+            return calendarAvailabilityService.GetAvailableBlocks();
         }
         
     }

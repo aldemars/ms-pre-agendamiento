@@ -7,6 +7,6 @@ namespace ms_pre_agendamiento.Models
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public List<ScheduledCalendarBlock> ScheduledBlocks { get; set; }
+        public List<TimeSlot> AvailableSlots { get; set; }
     }
 }

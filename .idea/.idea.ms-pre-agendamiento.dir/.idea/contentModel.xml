@@ -21,7 +21,8 @@
       </e>
       <e p="Models" t="Include">
         <e p="Calendar.cs" t="Include" />
-        <e p="ScheduledCalendarBlock.cs" t="Include" />
+        <e p="TimeSlot.cs" t="Include" />
+        <e p="TimeSlotComparator.cs" t="Include" />
         <e p="WeatherForecast.cs" t="Include" />
       </e>
       <e p="ms-pre-agendamiento.csproj" t="IncludeRecursive" />
@@ -39,6 +40,8 @@
       </e>
       <e p="README.md" t="Include" />
       <e p="Repository" t="Include">
+        <e p="AllCalendarBlockRepository.cs" t="Include" />
+        <e p="IAllCalendarBlockRepository.cs" t="Include" />
         <e p="IScheduledCalendarBlockRepository.cs" t="Include" />
         <e p="ScheduledCalendarBlockRepository.cs" t="Include" />
       </e>

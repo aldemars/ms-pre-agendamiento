@@ -26,6 +26,7 @@ namespace ms_pre_agendamiento
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IScheduledCalendarBlockRepository, ScheduledCalendarBlockRepository>();
+            services.AddTransient<IAllCalendarBlockRepository, AllCalendarBlockRepository>();
             services.AddTransient<ICalendarAvailabilityService, CalendarAvailabilityService>();
             services.AddControllers();
         }
