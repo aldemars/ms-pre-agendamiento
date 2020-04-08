@@ -40,10 +40,10 @@
       </e>
       <e p="README.md" t="Include" />
       <e p="Repository" t="Include">
-        <e p="AllCalendarBlockRepository.cs" t="Include" />
-        <e p="IAllCalendarBlockRepository.cs" t="Include" />
-        <e p="IScheduledCalendarBlockRepository.cs" t="Include" />
-        <e p="ScheduledCalendarBlockRepository.cs" t="Include" />
+        <e p="AllCalendarTimeSlotsRepository.cs" t="Include" />
+        <e p="BusyCalendarTimeSlotsRepository.cs" t="Include" />
+        <e p="IAllCalendarTimeSlotsRepository.cs" t="Include" />
+        <e p="IBusyCalendarTimeSlotsRepository.cs" t="Include" />
       </e>
       <e p="Service" t="Include">
         <e p="CalendarAvailabilityService.cs" t="Include" />

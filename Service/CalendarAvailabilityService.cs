@@ -7,28 +7,22 @@ namespace ms_pre_agendamiento
 {
     public class CalendarAvailabilityService : ICalendarAvailabilityService
     {
-        private readonly IScheduledCalendarBlockRepository scheduledCalendarBlockRepository;
-        private readonly IAllCalendarBlockRepository allCalendarBlockRepository;
+        private readonly IBusyCalendarTimeSlotsRepository _busyCalendarTimeSlotsRepository;
+        private readonly IAllCalendarTimeSlotsRepository _allCalendarTimeSlotsRepository;
 
-        public CalendarAvailabilityService(IScheduledCalendarBlockRepository scheduledCalendarBlockRepository,
-            IAllCalendarBlockRepository allCalendarBlockRepository)
+        public CalendarAvailabilityService(IBusyCalendarTimeSlotsRepository busyCalendarTimeSlotsRepository,
+            IAllCalendarTimeSlotsRepository allCalendarTimeSlotsRepository)
         {
-            this.scheduledCalendarBlockRepository =
-                scheduledCalendarBlockRepository ?? throw new ArgumentNullException("ScheduledCalendarBlockRepository");
-            this.allCalendarBlockRepository =
-                allCalendarBlockRepository ?? throw new ArgumentNullException("AllCalendarBlockRepository");
+            _busyCalendarTimeSlotsRepository =
+                busyCalendarTimeSlotsRepository ?? throw new ArgumentNullException("ScheduledCalendarBlockRepository");
+            _allCalendarTimeSlotsRepository =
+                allCalendarTimeSlotsRepository ?? throw new ArgumentNullException("AllCalendarBlockRepository");
         }
 
-        public int GetBlocksSize()
-        {
-            var block = scheduledCalendarBlockRepository.GetScheduledBlocksMock();
-            return block.Count;
-        }
-        
         public IEnumerable<TimeSlot> GetAvailableBlocks()
         {
-            var allSlots = allCalendarBlockRepository.GetAllSlotsMock();
-            var busySlots = scheduledCalendarBlockRepository.GetScheduledBlocksMock();
+            var allSlots = _allCalendarTimeSlotsRepository.GetAllTimeSlotsMock();
+            var busySlots = _busyCalendarTimeSlotsRepository.GetScheduledBlocksMock();
             return allSlots.Except(busySlots, new TimeSlotComparator());
         }
     }

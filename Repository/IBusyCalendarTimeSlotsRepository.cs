@@ -3,8 +3,8 @@ using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento
 {
-    public interface IAllCalendarBlockRepository
+    public interface IBusyCalendarTimeSlotsRepository
     {
-        List<TimeSlot> GetAllSlotsMock();
+        IEnumerable<TimeSlot> GetScheduledBlocksMock();
     }
 }
