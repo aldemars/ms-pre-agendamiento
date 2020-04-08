@@ -4,9 +4,9 @@ using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento
 {
-    public class AllCalendarBlockRepository:IAllCalendarBlockRepository
+    public class AllCalendarTimeSlotsRepository : IAllCalendarTimeSlotsRepository
     {
-        public List<TimeSlot> GetAllSlotsMock()
+        public IEnumerable<TimeSlot> GetAllTimeSlotsMock()
         {
             return new List<TimeSlot>
             {

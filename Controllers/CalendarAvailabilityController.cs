@@ -9,20 +9,18 @@ namespace ms_pre_agendamiento.Controllers
     [Route("[controller]")]
     public class CalendarAvailabilityController
     {
-        private readonly ICalendarAvailabilityService calendarAvailabilityService;
+        private readonly ICalendarAvailabilityService _calendarAvailabilityService;
 
         public CalendarAvailabilityController(ICalendarAvailabilityService calendarAvailabilityService)
         {
-            this.calendarAvailabilityService = 
+            _calendarAvailabilityService =
                 calendarAvailabilityService ?? throw new ArgumentNullException("CalendarAvailabilityService");
-            
         }
-        
+
         [HttpGet]
-        public IEnumerable<TimeSlot> Get()
+        public IEnumerable<TimeSlot> GetAvailableSlots()
         {
-            return calendarAvailabilityService.GetAvailableBlocks();
+            return _calendarAvailabilityService.GetAvailableBlocks();
         }
-        
     }
 }
