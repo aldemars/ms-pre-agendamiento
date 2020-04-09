@@ -50,7 +50,7 @@ Temporary Items
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
-<<<<<<< HEAD
+
 # End of https://www.gitignore.io/api/macos,dotnetcore,visualstudiocode
 ### JetBrains+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
