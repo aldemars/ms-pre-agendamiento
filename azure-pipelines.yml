@@ -96,9 +96,6 @@ stages:
           - task: Kubernetes@1
             displayName: 'Create a new namespace for the pull request'
             inputs:
-              azureSubscriptionEndpoint: 'dev-ms-pre-agendamiento-cluster-'
-              azureResourceGroup: 'dev-pre-agendamiento'
-              kubernetesCluster: 'dev-ms-pre-agendamiento-cluster'
               command: apply
               useConfigurationFile: true
               inline: '{ "kind": "Namespace", "apiVersion": "v1", "metadata": { "name": "$(k8sNamespaceForPR)" }}'
