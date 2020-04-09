@@ -110,6 +110,8 @@ stages:
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespaceForPR)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
           
           - task: KubernetesManifest@0
             displayName: Deploy to the new namespace in the Kubernetes cluster
@@ -123,6 +125,8 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
           
           - task: Kubernetes@1
             name: get
@@ -133,6 +137,8 @@ stages:
               namespace: $(k8sNamespaceForPR)
               arguments: svc
               outputFormat: jsonpath='http://{.items[0].status.loadBalancer.ingress[0].ip}:{.items[0].spec.ports[0].port}'
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
               
           # Getting the IP of the deployed service and writing it to a variable for posing comment
           - script: |
