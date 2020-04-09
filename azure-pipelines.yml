@@ -97,7 +97,8 @@ stages:
             displayName: 'Create a new namespace for the pull request'
             inputs:
               command: apply
-              useConfigurationFile: false
+              useConfigurationFile: true
+              useClusterAdmin: true
               inline: '{ "kind": "Namespace", "apiVersion": "v1", "metadata": { "name": "$(k8sNamespaceForPR)" }}'
 
           - task: KubernetesManifest@0
