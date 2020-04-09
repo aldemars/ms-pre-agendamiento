@@ -5,7 +5,7 @@ metadata:
   name: azure-devops-deploy-role
 rules:
 - apiGroups: ["", "extensions", "apps"]
-  resources: ["deployments", "replicasets", "pods", "services"]
+  resources: ["deployments", "replicasets", "pods", "services","namespaces"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
 ---
 kind: RoleBinding
