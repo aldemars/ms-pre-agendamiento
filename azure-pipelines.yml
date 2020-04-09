@@ -100,6 +100,8 @@ stages:
               useConfigurationFile: true
               useClusterAdmin: true
               inline: '{ "kind": "Namespace", "apiVersion": "v1", "metadata": { "name": "$(k8sNamespaceForPR)" }}'
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
 
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
