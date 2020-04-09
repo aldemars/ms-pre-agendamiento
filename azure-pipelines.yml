@@ -67,6 +67,8 @@ stages:
               action: createSecret
               secretName: $(imagePullSecret)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
               
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
