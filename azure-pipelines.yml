@@ -96,12 +96,12 @@ stages:
           - task: Kubernetes@1
             displayName: 'Create a new namespace for the pull request'
             inputs:
-              azureSubscriptionEndpoint: 'dev-ms-pre-agendamiento-cluster-'
-              azureResourceGroup: 'dev-pre-agendamiento'
-              kubernetesCluster: 'dev-ms-pre-agendamiento-cluster'
               command: apply
               useConfigurationFile: true
+              useClusterAdmin: true
               inline: '{ "kind": "Namespace", "apiVersion": "v1", "metadata": { "name": "$(k8sNamespaceForPR)" }}'
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
 
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
@@ -110,6 +110,7 @@ stages:
               secretName: $(imagePullSecret)
               namespace: $(k8sNamespaceForPR)
               dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+              kubernetesServiceConnection: dev-ms-pre-agendamiento-cluster-default
           
           - task: KubernetesManifest@0
             displayName: Deploy to the new namespace in the Kubernetes cluster
@@ -123,6 +124,7 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
+              kubernetesServiceConnection: dev-ms-pre-agendamiento-cluster-default
           
           - task: Kubernetes@1
             name: get
@@ -133,6 +135,8 @@ stages:
               namespace: $(k8sNamespaceForPR)
               arguments: svc
               outputFormat: jsonpath='http://{.items[0].status.loadBalancer.ingress[0].ip}:{.items[0].spec.ports[0].port}'
+              connectionType: Kubernetes Service Connection
+              kubernetesServiceEndpoint: dev-ms-pre-agendamiento-cluster-default
               
           # Getting the IP of the deployed service and writing it to a variable for posing comment
           - script: |
