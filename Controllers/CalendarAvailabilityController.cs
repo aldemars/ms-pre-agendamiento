@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ms_pre_agendamiento.Models;
 
@@ -18,9 +19,14 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TimeSlot> GetAvailableSlots()
+        public IActionResult GetAvailableSlots()
         {
-            return _calendarAvailabilityService.GetAvailableBlocks();
+            IEnumerable<TimeSlot> availableBlocks = _calendarAvailabilityService.GetAvailableBlocks();
+            if (!availableBlocks.Any())
+            {
+                return new NotFoundResult();
+            }
+            return new ObjectResult(availableBlocks);
         }
     }
 }
