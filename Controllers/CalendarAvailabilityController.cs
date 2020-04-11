@@ -24,7 +24,7 @@ namespace ms_pre_agendamiento.Controllers
             IEnumerable<TimeSlot> availableBlocks = _calendarAvailabilityService.GetAvailableBlocks();
             if (!availableBlocks.Any())
             {
-                return new NotFoundResult();
+                return new NoContentResult();
             }
             return new ObjectResult(availableBlocks);
         }
