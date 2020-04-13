@@ -1,3 +1,4 @@
+using System.Linq;
 using NUnit.Framework;
 
 namespace ms_pre_agendamiento.Tests
