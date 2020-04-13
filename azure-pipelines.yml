@@ -52,7 +52,6 @@ stages:
 
   jobs:
   - deployment: Deploy
-    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
@@ -79,7 +78,6 @@ stages:
                 $(imagePullSecret)
               containers: |
                 $(containerRegistry)/$(imageRepository):$(tag)
-
 - stage: Deploy_Production
   displayName: Deploy Production
   dependsOn: Build
