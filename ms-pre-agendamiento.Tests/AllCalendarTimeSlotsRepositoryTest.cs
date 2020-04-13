@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace ms_pre_agendamiento.Tests
 {
-    public class Tests
+    public class AllCalendarTimeSlotsRepositoryTests
     {
         private AllCalendarTimeSlotsRepository _allCalendarTimeSlots;
 
