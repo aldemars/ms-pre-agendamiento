@@ -6,6 +6,8 @@
 # .NET Core build folders
 /bin
 /obj
+ms-pre-agendamiento.Tests/obj
+ms-pre-agendamiento.Tests/obj/
 
 # Common node modules locations
 /node_modules
