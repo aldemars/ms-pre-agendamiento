@@ -5,15 +5,25 @@ namespace ms_pre_agendamiento.Tests
 {
     public class Tests
     {
+        private AllCalendarTimeSlotsRepository _allCalendarTimeSlots;
+
         [SetUp]
         public void Setup()
         {
+            _allCalendarTimeSlots = new AllCalendarTimeSlotsRepository();
         }
 
         [Test]
-        public void Test1()
+        public void GetAllTimeSlotsMock_ShouldReturnListOfTimeSlots()
         {
-            Assert.Pass();
+            // Arrange
+            const int expected = 4;
+
+            // Act
+            var actual = _allCalendarTimeSlots.GetAllTimeSlotsMock().Count();
+
+            // Assert
+            Assert.AreEqual(actual, expected);
         }
     }
 }
