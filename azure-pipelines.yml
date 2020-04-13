@@ -43,7 +43,7 @@ stages:
         tags: |
           $(tag)
           
-    - upload: manifests
+    - upload: ms-pre-agendamiento/manifests
       artifact: manifests
 
 - stage: Deploy_Dev
