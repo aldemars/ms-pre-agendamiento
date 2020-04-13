@@ -18,6 +18,11 @@ namespace ms_pre_agendamiento.Controllers
                 calendarAvailabilityService ?? throw new ArgumentNullException("CalendarAvailabilityService");
         }
 
+        public IEnumerable<TimeSlot> GetAvailableSlotsFromService()
+        {
+            return _calendarAvailabilityService.GetAvailableBlocks();
+        }
+        
         [HttpGet]
         public IActionResult GetAvailableSlots()
         {
@@ -27,6 +32,16 @@ namespace ms_pre_agendamiento.Controllers
                 return new NoContentResult();
             }
             return new ObjectResult(availableBlocks);
+        }
+
+        [HttpPost]
+        public Calendar GetCalendarWithAvailableTimeSlots([FromBody] CalendarRequest calendarRequest)
+        {
+            return new Calendar(
+                calendarRequest.From,
+                calendarRequest.To,
+                GetAvailableSlotsFromService().ToList()
+            );
         }
     }
 }
