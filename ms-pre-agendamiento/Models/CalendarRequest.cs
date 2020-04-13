@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 
 namespace ms_pre_agendamiento.Models
 {
-    public class Calendar
+    public class CalendarRequest
     {
         public DateTime From { get; set; }
         public DateTime To { get; set; }
-        public List<TimeSlot> AvailableSlots { get; set; }
     }
 }

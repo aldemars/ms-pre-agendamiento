@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: 'a075c133-83b5-4c90-818e-8cf0a0a8d6da'
   imageRepository: 'mspreagendamiento'
   containerRegistry: 'preagendamiento.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: '**/ms-pre-agendamiento/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'preagendamiento1872da65-auth'
 
@@ -43,7 +43,7 @@ stages:
         tags: |
           $(tag)
           
-    - upload: manifests
+    - upload: ms-pre-agendamiento/manifests
       artifact: manifests
 
 - stage: Deploy_Dev
@@ -104,8 +104,8 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/service.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
