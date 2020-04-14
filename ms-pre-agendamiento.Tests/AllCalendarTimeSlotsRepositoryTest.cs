@@ -1,19 +1,18 @@
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace ms_pre_agendamiento.Tests
 {
     public class AllCalendarTimeSlotsRepositoryTests
     {
-        private AllCalendarTimeSlotsRepository _allCalendarTimeSlots;
+        private readonly AllCalendarTimeSlotsRepository _allCalendarTimeSlots;
 
-        [SetUp]
-        public void Setup()
+        public AllCalendarTimeSlotsRepositoryTests()
         {
             _allCalendarTimeSlots = new AllCalendarTimeSlotsRepository();
         }
 
-        [Test]
+        [Fact]
         public void GetAllTimeSlotsMock_ShouldReturnListOfTimeSlots()
         {
             // Arrange
@@ -23,7 +22,7 @@ namespace ms_pre_agendamiento.Tests
             var actual = _allCalendarTimeSlots.GetAllTimeSlotsMock().Count();
 
             // Assert
-            Assert.AreEqual(actual, expected);
+            Assert.Equal(expected, actual);
         }
     }
 }
