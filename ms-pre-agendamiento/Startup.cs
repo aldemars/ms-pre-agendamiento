@@ -30,9 +30,9 @@ namespace ms_pre_agendamiento
                     {
                         builder.WithOrigins(
                                 "https://localhost:3000",
-                                "http://pre-agendamiento-front.azurewebsites.net",
-                                "http://52.141.211.84/calendaravailability/",
-                                "http://52.141.211.84/")
+                                "http://localhost:3000/disponibilidad",
+                                "http://pre-agendamiento-front.azurewebsites.net")
+                            .AllowAnyHeader()
                             .WithMethods("GET", "POST");
                     });
             });
