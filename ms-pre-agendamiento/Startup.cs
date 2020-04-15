@@ -29,9 +29,8 @@ namespace ms_pre_agendamiento
                     builder =>
                     {
                         builder.WithOrigins(
-                                "https://localhost:3000",
-                                "http://localhost:3000/disponibilidad",
-                                "http://pre-agendamiento-front.azurewebsites.net")
+                                "http://localhost:3000",
+                                "http://localhost:3000/disponibilidad")
                             .AllowAnyHeader()
                             .WithMethods("GET", "POST");
                     });
