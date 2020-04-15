@@ -7,6 +7,7 @@ using ms_pre_agendamiento.Models;
 namespace ms_pre_agendamiento.Controllers
 {
     [ApiController]
+    [ApiExplorerSettings(IgnoreApi = true)]
     [Route("[controller]")]
     public class CalendarAvailabilityController
     {

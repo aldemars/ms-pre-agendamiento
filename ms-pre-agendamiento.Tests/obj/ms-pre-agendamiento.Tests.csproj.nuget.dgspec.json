@@ -1,20 +1,105 @@
 {
   "format": 1,
   "restore": {
-    "/Users/gmartinez/src/project-study-achs/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj": {}
+    "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj": {}
   },
   "projects": {
-    "/Users/gmartinez/src/project-study-achs/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj": {
+    "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/gmartinez/src/project-study-achs/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj",
+        "projectUniqueName": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj",
         "projectName": "ms-pre-agendamiento.Tests",
-        "projectPath": "/Users/gmartinez/src/project-study-achs/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj",
-        "packagesPath": "/Users/gmartinez/.nuget/packages/",
-        "outputPath": "/Users/gmartinez/src/project-study-achs/ms-pre-agendamiento/ms-pre-agendamiento.Tests/obj/",
+        "projectPath": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento.Tests/ms-pre-agendamiento.Tests.csproj",
+        "packagesPath": "/Users/alvarohernandez/.nuget/packages/",
+        "outputPath": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento.Tests/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/gmartinez/.nuget/NuGet/NuGet.Config"
+          "/Users/alvarohernandez/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/ms-pre-agendamiento.csproj": {
+                "projectPath": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/ms-pre-agendamiento.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.13.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.console": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/ms-pre-agendamiento.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/ms-pre-agendamiento.csproj",
+        "projectName": "ms-pre-agendamiento",
+        "projectPath": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/ms-pre-agendamiento.csproj",
+        "packagesPath": "/Users/alvarohernandez/.nuget/packages/",
+        "outputPath": "/Users/alvarohernandez/dev/ms-pre-agendamiento/ms-pre-agendamiento/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/alvarohernandez/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -36,17 +121,9 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.NET.Test.Sdk": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[16.4.0, )"
-            },
-            "NUnit3TestAdapter": {
-              "target": "Package",
-              "version": "[3.15.1, )"
-            },
-            "nunit": {
-              "target": "Package",
-              "version": "[3.12.0, )"
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -60,11 +137,14 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.102/RuntimeIdentifierGraph.json"
         }
       }
     }
