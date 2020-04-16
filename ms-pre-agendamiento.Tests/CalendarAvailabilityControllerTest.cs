@@ -22,10 +22,10 @@ namespace ms_pre_agendamiento.Tests
                 .Returns(
                     new List<TimeSlot>
                     {
-                        new TimeSlot() {Date = DateTime.Now, HourFrom = 1, HourTo = 2},
-                        new TimeSlot() {Date = DateTime.Now, HourFrom = 3, HourTo = 4},
-                        new TimeSlot() {Date = DateTime.Now, HourFrom = 5, HourTo = 6},
-                        new TimeSlot() {Date = DateTime.Now, HourFrom = 7, HourTo = 8}
+                        new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 1, HourTo = 2},
+                        new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 3, HourTo = 4},
+                        new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 5, HourTo = 6},
+                        new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 7, HourTo = 8}
                     }
                 );
             var calendarAvailabilityController =
