@@ -10,10 +10,10 @@ namespace ms_pre_agendamiento
         {
             return new List<TimeSlot>
             {
-                new TimeSlot() {Date = DateTime.Now, HourFrom = 10, HourTo = 11},
-                new TimeSlot() {Date = DateTime.Now, HourFrom = 12, HourTo = 13},
-                new TimeSlot() {Date = DateTime.Now, HourFrom = 13, HourTo = 14},
-                new TimeSlot() {Date = DateTime.Now, HourFrom = 15, HourTo = 16}
+                new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 10, HourTo = 11},
+                new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 12, HourTo = 13},
+                new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 13, HourTo = 14},
+                new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 15, HourTo = 16}
             };
         }
     }

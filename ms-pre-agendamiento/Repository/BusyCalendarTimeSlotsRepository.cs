@@ -10,7 +10,7 @@ namespace ms_pre_agendamiento
         {
             return new List<TimeSlot>
             {
-                new TimeSlot() {Date = DateTime.Now, HourFrom = 13, HourTo = 14}
+                new TimeSlot() {Date = DateTime.Now.ToShortDateString(), HourFrom = 13, HourTo = 14}
             };
         }
     }
