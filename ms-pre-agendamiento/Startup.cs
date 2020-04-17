@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
 using ms_pre_agendamiento.Service.Impl;
+using Polly;
 
 namespace ms_pre_agendamiento
 {
@@ -41,8 +42,13 @@ namespace ms_pre_agendamiento
             services.AddControllers();
 
             var healthCareFacilitiesUri = Configuration.GetSection("AppSettings")["HealthCareFacilitiesUri"];
-            services.AddHttpClient("HealthCareFacilitiesAPI",
-                c => c.BaseAddress = new Uri(healthCareFacilitiesUri));
+            services.AddHttpClient("HealthCareFacilitiesAPI", client => 
+                client.BaseAddress = new Uri(healthCareFacilitiesUri)
+                )
+                .AddTransientHttpErrorPolicy(
+                    x => 
+                        x.WaitAndRetryAsync(3, _=> TimeSpan.FromMilliseconds(300)));
+            
             services.AddTransient<IBusyCalendarTimeSlotsRepository, BusyCalendarTimeSlotsRepository>();
             services.AddTransient<IAllCalendarTimeSlotsRepository, AllCalendarTimeSlotsRepository>();
             services.AddTransient<ICalendarAvailabilityService, CalendarAvailabilityService>();
