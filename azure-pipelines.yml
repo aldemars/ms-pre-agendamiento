@@ -36,8 +36,8 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          echo $(ConnectionStrings.database)
-          echo $(ConnectionStrings)
+          echo %ConnectionStrings.database
+          echo %ConnectionStrings
           
           echo Hello world
     - task: Docker@2
