@@ -5,13 +5,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
+using ms_pre_agendamiento.Service.Impl;
 
 namespace ms_pre_agendamiento
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public Startup(IConfiguration configuration)
         {
@@ -25,7 +27,7 @@ namespace ms_pre_agendamiento
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
+                options.AddPolicy(MyAllowSpecificOrigins,
                     builder =>
                     {
                         builder.WithOrigins(
@@ -38,13 +40,13 @@ namespace ms_pre_agendamiento
 
             services.AddControllers();
 
-            var healthCareFacilitiesUri = Configuration.GetSection("AppSettings")["HealthcareFacilitiesUri"];
-            services.AddHttpClient("HealthcareFacilitiesAPI",
+            var healthCareFacilitiesUri = Configuration.GetSection("AppSettings")["HealthCareFacilitiesUri"];
+            services.AddHttpClient("HealthCareFacilitiesAPI",
                 c => c.BaseAddress = new Uri(healthCareFacilitiesUri));
             services.AddTransient<IBusyCalendarTimeSlotsRepository, BusyCalendarTimeSlotsRepository>();
             services.AddTransient<IAllCalendarTimeSlotsRepository, AllCalendarTimeSlotsRepository>();
             services.AddTransient<ICalendarAvailabilityService, CalendarAvailabilityService>();
-            services.AddTransient<IHealthcareFacilityService, HealthcareFacilityService>();
+            services.AddTransient<IHealthCareFacilityService, HealthCareFacilityService>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}); });
         }

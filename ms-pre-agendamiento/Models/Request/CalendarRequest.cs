@@ -1,6 +1,6 @@
 using System;
 
-namespace ms_pre_agendamiento.Models
+namespace ms_pre_agendamiento.Models.Request
 {
     public class CalendarRequest
     {

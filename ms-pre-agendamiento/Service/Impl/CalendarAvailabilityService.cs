@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ms_pre_agendamiento.Models;
+using ms_pre_agendamiento.Models.Comparator;
+using ms_pre_agendamiento.Models.Request;
 
-namespace ms_pre_agendamiento
+namespace ms_pre_agendamiento.Service.Impl
 {
     public class CalendarAvailabilityService : ICalendarAvailabilityService
     {
@@ -21,8 +23,11 @@ namespace ms_pre_agendamiento
 
         public IEnumerable<TimeSlot> GetAvailableBlocks()
         {
-            var allSlots = _allCalendarTimeSlotsRepository.GetAllTimeSlotsMock();
-            var busySlots = _busyCalendarTimeSlotsRepository.GetScheduledBlocksMock();
+            var allSlots = _allCalendarTimeSlotsRepository.GetAllTimeSlotsMock()
+                           ?? throw new ArgumentNullException("_allCalendarTimeSlotsRepository.GetAllTimeSlotsMock()");
+            var busySlots = _busyCalendarTimeSlotsRepository.GetScheduledBlocksMock()
+                            ?? throw new ArgumentNullException(
+                                "_busyCalendarTimeSlotsRepository.GetScheduledBlocksMock()");
             return allSlots.Except(busySlots, new TimeSlotComparator());
         }
     }

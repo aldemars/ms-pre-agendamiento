@@ -5,10 +5,10 @@ namespace ms_pre_agendamiento.Models
 {
     public class Calendar
     {
-        public DateTime From { get; set; }
-        public DateTime To { get; set; }
-        public List<TimeSlot> AvailableSlots { get; set; }
-        
+        private DateTime From { get; }
+        private DateTime To { get; }
+        private List<TimeSlot> AvailableSlots { get; }
+
         public Calendar(DateTime from, DateTime to, List<TimeSlot> availableTimeSlots)
         {
             From = from;

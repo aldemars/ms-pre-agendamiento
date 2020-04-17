@@ -1,29 +1,27 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ms_pre_agendamiento.Models;
-using ms_pre_agendamiento.Service;
 using static System.Text.Json.JsonSerializer;
 
-namespace ms_pre_agendamiento
+namespace ms_pre_agendamiento.Service.Impl
 {
-    public class HealthcareFacilityService : IHealthcareFacilityService
+    public class HealthCareFacilityService : IHealthCareFacilityService
     {
         private readonly ILogger _logger;
-
         private readonly HttpClient _httpClient;
 
-        public HealthcareFacilityService(IHttpClientFactory httpClientFactory,
-            ILogger<HealthcareFacilityService> logger)
+        public HealthCareFacilityService(IHttpClientFactory httpClientFactory,
+            ILogger<HealthCareFacilityService> logger)
         {
-            _logger = logger;
-            _httpClient = httpClientFactory.CreateClient("HealthcareFacilitiesAPI");
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _httpClient = httpClientFactory.CreateClient("HealthCareFacilitiesAPI");
         }
 
         public async Task<IEnumerable<HealthcareFacility>> GetAll()
         {
-            IEnumerable<HealthcareFacility> centers = new List<HealthcareFacility>();
             var response = await _httpClient.GetAsync($"/api/centros/");
             if (!response.IsSuccessStatusCode)
             {

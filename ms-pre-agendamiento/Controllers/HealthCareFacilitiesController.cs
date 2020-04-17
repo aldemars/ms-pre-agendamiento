@@ -7,15 +7,13 @@ using ms_pre_agendamiento.Service;
 
 namespace ms_pre_agendamiento.Controllers
 {
-    [ApiController]
-    [ApiExplorerSettings(IgnoreApi = true)]
-    [Route("[controller]")]
+    [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
     public class HealthCareFacilitiesController
     {
-        private readonly IHealthcareFacilityService _healthcareFacilityService;
+        private readonly IHealthCareFacilityService _healthcareFacilityService;
         private readonly ICalendarAvailabilityService _calendarAvailabilityService;
 
-        public HealthCareFacilitiesController(IHealthcareFacilityService healthCareFacilityService,
+        public HealthCareFacilitiesController(IHealthCareFacilityService healthCareFacilityService,
             ICalendarAvailabilityService calendarAvailabilityService)
         {
             _healthcareFacilityService =
@@ -32,18 +30,21 @@ namespace ms_pre_agendamiento.Controllers
         [HttpGet]
         public IActionResult GetHealthCareFacilities()
         {
+            var availableBlocks = GetAvailableSlotsFromService();
+
             var healthCareFacilities =
                 _healthcareFacilityService.GetAll().Result.ToList();
-
-            var availableBlocks = GetAvailableSlotsFromService();
 
             foreach (var facility in healthCareFacilities)
             {
                 facility.disponibilidad = availableBlocks;
             }
 
-            var centers = new Dictionary<string, List<HealthcareFacility>>();
-            centers.Add("centros", healthCareFacilities);
+            const string keyCenterDictionary = "centros";
+            var centers = new Dictionary<string, List<HealthcareFacility>>
+            {
+                {keyCenterDictionary, healthCareFacilities}
+            };
 
             return new ObjectResult(centers);
         }

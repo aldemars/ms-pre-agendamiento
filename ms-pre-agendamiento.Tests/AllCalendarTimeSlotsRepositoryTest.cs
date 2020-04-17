@@ -1,4 +1,5 @@
 using System.Linq;
+using ms_pre_agendamiento.Repository.Impl;
 using Xunit;
 
 namespace ms_pre_agendamiento.Tests

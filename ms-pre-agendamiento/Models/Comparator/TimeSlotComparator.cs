@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ms_pre_agendamiento.Models
+namespace ms_pre_agendamiento.Models.Comparator
 {
     public class TimeSlotComparator : IEqualityComparer<TimeSlot>
     {
