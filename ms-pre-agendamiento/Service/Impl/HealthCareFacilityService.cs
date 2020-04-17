@@ -22,18 +22,18 @@ namespace ms_pre_agendamiento.Service.Impl
 
         public async Task<IEnumerable<HealthcareFacility>> GetAll()
         {
-            var response = await _httpClient.GetAsync($"/api/centros/");
-            if (!response.IsSuccessStatusCode)
+            var healthCareFacilityAPIResponse = await _httpClient.GetAsync($"/api/centros/");
+            if (!healthCareFacilityAPIResponse.IsSuccessStatusCode)
             {
-                _logger.LogWarning("Error retrieving Healthcare Facilities, Status Code:{StatusCode}",
-                    response.StatusCode);
-                throw new HttpRequestException(response.ReasonPhrase);
+                _logger.LogWarning("Error retrieving HealthCare Facilities, Status Code:{StatusCode}",
+                    healthCareFacilityAPIResponse.StatusCode);
+                throw new HttpRequestException(healthCareFacilityAPIResponse.ReasonPhrase);
             }
 
-            var result = await response.Content.ReadAsStringAsync();
-            var data = Deserialize<Dictionary<string, List<HealthcareFacility>>>(result);
-
-            return data["centros"];
+            var healthCareFacilityContent = await healthCareFacilityAPIResponse.Content.ReadAsStringAsync();
+            var healthCareFacilityData =
+                Deserialize<Dictionary<string, List<HealthcareFacility>>>(healthCareFacilityContent);
+            return healthCareFacilityData["centros"];
         }
     }
 }
