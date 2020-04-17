@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using ms_pre_agendamiento.DTO;
+using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
 {
@@ -14,11 +15,18 @@ namespace ms_pre_agendamiento.Controllers
         private readonly SymmetricSecurityKey _mySecurityKey =
             new SymmetricSecurityKey(Encoding.ASCII.GetBytes("aaaaaaaaaaaaaaaaaaaaaaaa"));
 
+        private readonly IUserRepository _userRepository;
+
+        public Login(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
             Console.WriteLine(user);
-            if (user.Name != "test" || user.Password != "test") return Unauthorized();
+            if (!_userRepository.isValid(user)) return Unauthorized();
             const string myIssuer = "http://pre-agendamiento-front.azurewebsites.net";
 
             var tokenHandler = new JwtSecurityTokenHandler();

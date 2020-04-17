@@ -1,10 +1,13 @@
 using System;
+using System.Data.SqlClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
 using ms_pre_agendamiento.Service.Impl;
@@ -13,14 +16,16 @@ namespace ms_pre_agendamiento
 {
     public class Startup
     {
+
         private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        public IConfiguration Configuration { get; }
+
+        private ILogger<Startup> _logger;
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -49,14 +54,19 @@ namespace ms_pre_agendamiento
             services.AddTransient<IHealthCareFacilityService, HealthCareFacilityService>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}); });
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
+            _logger = logger;
+            UpdateConnectionString();
+            CheckDatabaseMigrations();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                _logger.LogInformation("In Development environment");
             }
 
             if (env.IsProduction() || env.IsStaging())
@@ -73,6 +83,34 @@ namespace ms_pre_agendamiento
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private void UpdateConnectionString()
+        {
+            string strConnection = Configuration.GetConnectionString("database")?
+                .Replace("{{devops}}", Configuration["dbpassword"])??"";
+            Configuration.GetSection("ConnectionStrings")["database"] = strConnection;
+
+        }
+        private void CheckDatabaseMigrations()
+        {
+            try
+            {
+                var cnx = new SqlConnection(Configuration.GetConnectionString("database"));
+                var location = Configuration.GetSection("AppSettings")["Evolve.Location"];
+                var evolve = new Evolve.Evolve(cnx)
+                {
+                    Locations = new[] { location },
+                    IsEraseDisabled = true,
+                };
+
+                evolve.Migrate();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message,ex);
+                throw;
+            }
         }
     }
 }
