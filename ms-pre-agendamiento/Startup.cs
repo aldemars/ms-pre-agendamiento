@@ -101,6 +101,7 @@ namespace ms_pre_agendamiento
             catch (Exception ex)
             {
                 _logger.LogError($"Error applying migrations :: <{ex.Message}>" ,ex);
+                throw;
             }
         }
     }
