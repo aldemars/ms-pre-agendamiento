@@ -36,7 +36,7 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          echo %ConnectionStrings.database%
+          echo $ConnectionStrings.database
           echo $ConnectionStrings
           
           echo Hello world
