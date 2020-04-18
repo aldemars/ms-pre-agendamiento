@@ -9,7 +9,6 @@ resources:
 - repo: self
 
 variables:
-
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'a075c133-83b5-4c90-818e-8cf0a0a8d6da'
   imageRepository: 'mspreagendamiento'
@@ -17,6 +16,7 @@ variables:
   dockerfilePath: '**/ms-pre-agendamiento/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'preagendamiento1872da65-auth'
+
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -27,6 +27,8 @@ variables:
 stages:
 - stage: Build
   displayName: Build stage
+  variables:
+  - group: dev-variable-group
   jobs:  
   - job: Build
     displayName: Build
@@ -36,7 +38,7 @@ stages:
     - task: CmdLine@2
       inputs:
         script: |
-          echo $ConnectionStrings.database
+          echo $[ConnectionStrings.database]
           echo $ConnectionStrings
           echo $(ConnectionStrings)
           
