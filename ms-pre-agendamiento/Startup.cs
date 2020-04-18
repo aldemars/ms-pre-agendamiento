@@ -62,8 +62,7 @@ namespace ms_pre_agendamiento
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             _logger = logger;
-            //UpdateConnectionString();
-            //CheckDatabaseMigrations();
+            CheckDatabaseMigrations();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -85,14 +84,6 @@ namespace ms_pre_agendamiento
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
-
-        private void UpdateConnectionString()
-        {
-            string strConnection = Configuration.GetConnectionString("database")?
-                .Replace("{{devops}}", Configuration["dbpassword"])??"";
-            Configuration.GetSection("ConnectionStrings")["database"] = strConnection;
-
-        }
         private void CheckDatabaseMigrations()
         {
             try
@@ -109,7 +100,7 @@ namespace ms_pre_agendamiento
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message,ex);
+                _logger.LogError($"Error applying migrations :: <{ex.Message}>" ,ex);
                 throw;
             }
         }
