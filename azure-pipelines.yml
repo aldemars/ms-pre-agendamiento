@@ -78,7 +78,7 @@ stages:
           - task: CmdLine@2
             inputs:
               script: |
-                sed -i "s/\${ConnectionStrings}/$(secret1)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 echo Hello world              
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
