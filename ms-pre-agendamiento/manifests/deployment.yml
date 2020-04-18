@@ -14,7 +14,7 @@ spec:
           image: preagendamiento.azurecr.io/mspreagendamiento
           env:
             - name: ConnectionStrings
-              value: "$(ConnectionStrings) "
+              value: "${ConnectionStrings}"
             - name: DEMO_FAREWELL
               value: "Such a sweet sorrow"
           ports:
