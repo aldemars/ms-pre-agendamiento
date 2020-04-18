@@ -55,6 +55,7 @@ namespace ms_pre_agendamiento
             services.AddTransient<IHealthCareFacilityService, HealthCareFacilityService>();
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}); });
+            services.AddTransient<IRepositoryCommandExecuter, RepositoryCommandExecuter>();
             services.AddTransient<IUserRepository, UserRepository>();
         }
 
