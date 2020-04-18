@@ -38,6 +38,7 @@ stages:
         script: |
           echo $ConnectionStrings.database
           echo $ConnectionStrings
+          echo $(ConnectionStrings)
           
           echo Hello world
     - task: Docker@2
