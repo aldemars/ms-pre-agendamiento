@@ -4,10 +4,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using ms_pre_agendamiento.DTO;
-using ms_pre_agendamiento.Repository;
+using Ms_pre_agendamiento.DTO;
+using Ms_pre_agendamiento.Repository;
 
-namespace ms_pre_agendamiento.Controllers
+namespace Ms_pre_agendamiento.Controllers
 {
     [ApiController, Route("[controller]")]
     public class Login : ControllerBase
@@ -26,7 +26,7 @@ namespace ms_pre_agendamiento.Controllers
         public IActionResult Post([FromBody] User user)
         {
             Console.WriteLine(user);
-            if (!_userRepository.isValid(user)) return Unauthorized();
+            if (!_userRepository.IsValid(user)) return Unauthorized();
             const string myIssuer = "http://pre-agendamiento-front.azurewebsites.net";
 
             var tokenHandler = new JwtSecurityTokenHandler();

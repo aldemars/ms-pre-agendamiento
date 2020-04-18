@@ -7,12 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using ms_pre_agendamiento.Repository;
-using ms_pre_agendamiento.Repository.Impl;
-using ms_pre_agendamiento.Service;
-using ms_pre_agendamiento.Service.Impl;
+using Ms_pre_agendamiento.Repository;
+using Ms_pre_agendamiento.Repository.Impl;
+using Ms_pre_agendamiento.Service;
+using Ms_pre_agendamiento.Service.Impl;
 
-namespace ms_pre_agendamiento
+namespace Ms_pre_agendamiento
 {
     public class Startup
     {
@@ -88,11 +88,11 @@ namespace ms_pre_agendamiento
 
         private void UpdateConnectionString()
         {
-            string strConnection = Configuration.GetConnectionString("database")?
-                .Replace("{{devops}}", Configuration["dbpassword"])??"";
+            var strConnection = Configuration.GetConnectionString("database")?
+                .Replace("{{devops}}", Configuration["dbpassword"]) ?? string.Empty;
             Configuration.GetSection("ConnectionStrings")["database"] = strConnection;
-
         }
+
         private void CheckDatabaseMigrations()
         {
             try

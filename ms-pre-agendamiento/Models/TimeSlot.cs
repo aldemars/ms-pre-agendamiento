@@ -1,7 +1,4 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace ms_pre_agendamiento.Models
+namespace Ms_pre_agendamiento.Models
 {
     public class TimeSlot
     {

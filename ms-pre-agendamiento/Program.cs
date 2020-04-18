@@ -5,13 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.AzureKeyVault;
 using Microsoft.Extensions.Hosting;
 
-namespace ms_pre_agendamiento
+namespace Ms_pre_agendamiento
 {
     public class Program
     {
-        
-        private static string GetKeyVaultEndpoint() => "https://dev-pre-agendamiento.vault.azure.net/";
-        
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -23,16 +21,16 @@ namespace ms_pre_agendamiento
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     var keyVaultEndpoint = GetKeyVaultEndpoint();
-                    if (!string.IsNullOrEmpty(keyVaultEndpoint))
-                    {
-                        var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                        var keyVaultClient = new KeyVaultClient(
-                            new KeyVaultClient.AuthenticationCallback(
-                                azureServiceTokenProvider.KeyVaultTokenCallback));
-                        config.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
-                    }
+                    if (string.IsNullOrEmpty(keyVaultEndpoint)) return;
+                    var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                    var keyVaultClient = new KeyVaultClient(
+                        new KeyVaultClient.AuthenticationCallback(
+                            azureServiceTokenProvider.KeyVaultTokenCallback));
+                    config.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, new DefaultKeyVaultSecretManager());
                 })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
         }
+
+        private static string GetKeyVaultEndpoint() => "https://dev-pre-agendamiento.vault.azure.net/";
     }
 }

@@ -1,8 +1,9 @@
-namespace ms_pre_agendamiento.DTO
+namespace Ms_pre_agendamiento.DTO
 {
     public class User
     {
-        public string Name { set; get; }
-        public string Password { set; get; }
+        public string Name { get; set; }
+
+        public string Password { get; set; }
     }
 }

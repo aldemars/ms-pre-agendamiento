@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using ms_pre_agendamiento.Controllers;
-using ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Controllers;
+using Ms_pre_agendamiento.Models;
 using Xunit;
 
-namespace ms_pre_agendamiento.Tests
+namespace Ms_pre_agendamiento.Tests
 {
     public class CalendarAvailabilityControllerTest
     {
@@ -32,7 +32,7 @@ namespace ms_pre_agendamiento.Tests
                 new CalendarAvailabilityController(mockCalendarAvailabilityService.Object);
 
             // Act
-            var actual = calendarAvailabilityController.GetAvailableSlotsFromService().Count();
+            var actual = calendarAvailabilityController.AvailableSlotsFromService.Count();
 
             // Assert
             Assert.Equal(expected, actual);

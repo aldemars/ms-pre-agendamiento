@@ -1,12 +1,13 @@
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
-namespace ms_pre_agendamiento.Models
+namespace Ms_pre_agendamiento.Models
 {
+    using System.Collections.Generic;
+
     public class HealthcareFacility
     {
         public string id { get; set; }
-        public string nombre { set; get; }
-        public IEnumerable<TimeSlot> disponibilidad { set; get; }
+
+        public string nombre { get; set; }
+
+        public IEnumerable<TimeSlot> disponibilidad { get; set; }
     }
 }

@@ -1,12 +1,14 @@
-using System.Text.Json.Serialization;
-
-namespace ms_pre_agendamiento.Models
+namespace Ms_pre_agendamiento.Models
 {
+    using System.Text.Json.Serialization;
+
     public class User
     {
-        public string Id { set; get; }
-        public string Name { set; get; }
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
         [JsonIgnore]
-        public string Password { set; get; }
+        public string Password { get; set; }
     }
 }

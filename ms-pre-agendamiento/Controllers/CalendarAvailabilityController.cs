@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using ms_pre_agendamiento.Models;
-using ms_pre_agendamiento.Models.Request;
+using Ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Models.Request;
 
-namespace ms_pre_agendamiento.Controllers
+namespace Ms_pre_agendamiento.Controllers
 {
     [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
     public class CalendarAvailabilityController
@@ -18,15 +18,13 @@ namespace ms_pre_agendamiento.Controllers
                 calendarAvailabilityService ?? throw new ArgumentNullException("CalendarAvailabilityService");
         }
 
-        public IEnumerable<TimeSlot> GetAvailableSlotsFromService()
-        {
-            return _calendarAvailabilityService.GetAvailableBlocks();
-        }
+        public IEnumerable<TimeSlot> AvailableSlotsFromService => _calendarAvailabilityService.GetAvailableBlocks();
 
         [HttpGet]
         public IActionResult GetAvailableSlots()
         {
-            var availableBlocks = _calendarAvailabilityService.GetAvailableBlocks();
+            var availableBlocks = _calendarAvailabilityService.GetAvailableBlocks() ??
+                                  throw new ArgumentNullException("_calendarAvailabilityService.GetAvailableBlocks()");
             if (!availableBlocks.Any())
             {
                 return new NoContentResult();
@@ -36,13 +34,10 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpPost]
-        public Calendar GetCalendarWithAvailableTimeSlots([FromBody] CalendarRequest calendarRequest)
-        {
-            return new Calendar(
+        public Calendar GetCalendarWithAvailableTimeSlots([FromBody] CalendarRequest calendarRequest) =>
+            new Calendar(
                 calendarRequest.From,
                 calendarRequest.To,
-                GetAvailableSlotsFromService().ToList()
-            );
-        }
+                AvailableSlotsFromService.ToList());
     }
 }

@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ms_pre_agendamiento.Models;
-using ms_pre_agendamiento.Models.Comparator;
-using ms_pre_agendamiento.Models.Request;
+using Ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Models.Comparator;
 
-namespace ms_pre_agendamiento.Service.Impl
+namespace Ms_pre_agendamiento.Service.Impl
 {
     public class CalendarAvailabilityService : ICalendarAvailabilityService
     {

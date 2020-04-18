@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Models;
 using static System.Text.Json.JsonSerializer;
 
-namespace ms_pre_agendamiento.Service.Impl
+namespace Ms_pre_agendamiento.Service.Impl
 {
     public class HealthCareFacilityService : IHealthCareFacilityService
     {

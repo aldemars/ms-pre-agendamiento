@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Models;
 using static System.DateTime;
 using static System.Globalization.CultureInfo;
 
-namespace ms_pre_agendamiento.Repository.Impl
+namespace Ms_pre_agendamiento.Repository.Impl
 {
     public class AllCalendarTimeSlotsRepository : IAllCalendarTimeSlotsRepository
     {

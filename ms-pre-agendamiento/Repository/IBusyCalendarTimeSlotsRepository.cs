@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Models;
 
-namespace ms_pre_agendamiento
+namespace Ms_pre_agendamiento
 {
     public interface IBusyCalendarTimeSlotsRepository
     {

@@ -1,8 +1,8 @@
 using System.Linq;
-using ms_pre_agendamiento.Repository.Impl;
+using Ms_pre_agendamiento.Repository.Impl;
 using Xunit;
 
-namespace ms_pre_agendamiento.Tests
+namespace Ms_pre_agendamiento.Tests
 {
     public class AllCalendarTimeSlotsRepositoryTests
     {

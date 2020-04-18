@@ -1,40 +1,31 @@
-using System;
-using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-
-namespace ms_pre_agendamiento.Repository
+namespace Ms_pre_agendamiento.Repository
 {
+    using System;
+    using System.Data.SqlClient;
+    using Microsoft.Extensions.Configuration;
+
     public class EntityBaseRepository
     {
-        private readonly string _connStr;
-        
-        public string ConnectionString { 
-            get {return _connStr;} 
-        }
-        
-        
+        protected string _connectionString { get; }
+
         public EntityBaseRepository(IConfiguration configuration)
         {
-            _connStr = configuration.GetConnectionString("database");
+            _connectionString = configuration.GetConnectionString("database");
         }
-        
-        private void ExecuteCommand(string connStr, Action<SqlConnection> task)
-        {
-            using (var conn = new SqlConnection(connStr))
-            {
-                conn.Open();
 
-                task(conn);
-            }
-        }
         private protected T ExecuteCommand<T>(string connStr, Func<SqlConnection, T> task)
         {
-            using (var conn = new SqlConnection(connStr))
-            {
-                conn.Open();
-
-                return task(conn);
-            }
+            using var connection = new SqlConnection(connStr);
+            connection.Open();
+            return task(connection);
         }
+
+        private void ExecuteCommand(string connStr, Action<SqlConnection> task)
+        {
+            using var connection = new SqlConnection(connStr);
+            connection.Open();
+            task(connection);
+        }
+
     }
 }

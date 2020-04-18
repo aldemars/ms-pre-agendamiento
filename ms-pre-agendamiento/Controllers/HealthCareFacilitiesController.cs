@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using ms_pre_agendamiento.Models;
-using ms_pre_agendamiento.Service;
+using Ms_pre_agendamiento.Models;
+using Ms_pre_agendamiento.Service;
 
-namespace ms_pre_agendamiento.Controllers
+namespace Ms_pre_agendamiento.Controllers
 {
     [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
     public class HealthCareFacilitiesController
@@ -22,15 +22,12 @@ namespace ms_pre_agendamiento.Controllers
                 calendarAvailabilityService ?? throw new ArgumentNullException("CalendarAvailabilityService");
         }
 
-        private IEnumerable<TimeSlot> GetAvailableSlotsFromService()
-        {
-            return _calendarAvailabilityService.GetAvailableBlocks();
-        }
-
         [HttpGet]
         public IActionResult GetHealthCareFacilities()
         {
-            var availableBlocks = GetAvailableSlotsFromService();
+            const string keyCenterDictionary = "centros";
+            var availableBlocks = GetAvailableSlotsFromService() ??
+                                  throw new ArgumentNullException("GetAvailableSlotsFromService()");
 
             var healthCareFacilities =
                 _healthcareFacilityService.GetAll().Result.ToList();
@@ -40,13 +37,15 @@ namespace ms_pre_agendamiento.Controllers
                 facility.disponibilidad = availableBlocks;
             }
 
-            const string keyCenterDictionary = "centros";
             var centers = new Dictionary<string, List<HealthcareFacility>>
             {
-                {keyCenterDictionary, healthCareFacilities}
+                { keyCenterDictionary, healthCareFacilities },
             };
 
             return new ObjectResult(centers);
         }
+        
+        private IEnumerable<TimeSlot> GetAvailableSlotsFromService() =>
+            _calendarAvailabilityService.GetAvailableBlocks();
     }
 }
