@@ -12,8 +12,10 @@ spec:
       containers:
         - name: mspreagendamiento 
           image: preagendamiento.azurecr.io/mspreagendamiento
-          ports:
-          - containerPort: 80
           env:
             - name: ConnectionStrings
-            - value: $(ConnectionStrings) 
+              value: "$(ConnectionStrings) "
+            - name: DEMO_FAREWELL
+              value: "Such a sweet sorrow"
+          ports:
+          - containerPort: 80 
