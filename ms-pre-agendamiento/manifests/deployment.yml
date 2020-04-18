@@ -14,3 +14,6 @@ spec:
           image: preagendamiento.azurecr.io/mspreagendamiento
           ports:
           - containerPort: 80
+          env:
+            - name: ConnectionStrings
+            - value: $(ConnectionStrings) 
