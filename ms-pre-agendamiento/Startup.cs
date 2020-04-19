@@ -11,12 +11,12 @@ using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
 using ms_pre_agendamiento.Service.Impl;
+using Polly;
 
 namespace ms_pre_agendamiento
 {
     public class Startup
     {
-
         private const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
@@ -48,7 +48,9 @@ namespace ms_pre_agendamiento
 
             var healthCareFacilitiesUri = Configuration.GetSection("AppSettings")["HealthCareFacilitiesUri"];
             services.AddHttpClient("HealthCareFacilitiesAPI",
-                c => c.BaseAddress = new Uri(healthCareFacilitiesUri));
+                    c => c.BaseAddress = new Uri(healthCareFacilitiesUri))
+                .AddTransientHttpErrorPolicy(policy =>
+                    policy.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(300)));
             services.AddTransient<IBusyCalendarTimeSlotsRepository, BusyCalendarTimeSlotsRepository>();
             services.AddTransient<IAllCalendarTimeSlotsRepository, AllCalendarTimeSlotsRepository>();
             services.AddTransient<ICalendarAvailabilityService, CalendarAvailabilityService>();
