@@ -88,7 +88,8 @@ stages:
 - stage: Deploy_Production
   displayName: Deploy Production
   dependsOn: Deploy_Dev
-
+  variables:
+  - group: production-variable-group
   jobs:
   - deployment: Deploy
     displayName: Deploy
