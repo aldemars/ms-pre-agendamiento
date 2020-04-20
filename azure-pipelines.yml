@@ -74,6 +74,7 @@ stages:
             inputs:
               script: |
                 sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                cat $(Pipeline.Workspace)/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
