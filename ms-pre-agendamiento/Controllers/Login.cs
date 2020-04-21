@@ -42,7 +42,7 @@ namespace ms_pre_agendamiento.Controllers
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return new ObjectResult(tokenHandler.WriteToken(token));
+            return new ObjectResult(new LoginResponse(tokenHandler.WriteToken(token))) ;
         }
     }
 }
