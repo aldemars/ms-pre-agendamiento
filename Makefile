@@ -1,0 +1,2 @@
+me-happy:
+		dotnet test

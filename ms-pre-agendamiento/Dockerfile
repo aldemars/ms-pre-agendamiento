@@ -7,7 +7,7 @@ RUN dotnet restore
 
 # copy everything else and build app
 COPY . .
-RUN dotnet publish -c release -o /app --no-restore
+RUN dotnet publish -c release -o /app
 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime

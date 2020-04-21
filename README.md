@@ -12,7 +12,7 @@
 
 ### 1.- Clonar el código fuente.
 ```sh
-$ https://github.com/aldemars/ms-pre-agendamiento.git
+$ git clone https://github.com/aldemars/ms-pre-agendamiento.git
 ```
 
 ### 2.- Login en Azure
@@ -29,14 +29,17 @@ az login [--allow-no-subscriptions]
 ```
 o simplemente el siguiente comando y seguir las instrucciones:
 ```sh
-az login
+$ az login
 ```
 
 ### 3.- Iniciar el servicio.
 Puedes iniciar el servicio usando el CLI de dotnet, con docker, o con kubectl
-
-#### 3.1 dotnet CLI
-actualizar appsettings.json con el string de conección a la base de datos
+#### 3.1 bash
+```sh
+$ source runlocal.sh
+```
+#### 3.2 dotnet CLI
+actualizar ms-pre-agendamiento/appsettings.json con el string de conección a la base de datos
 ```json
 "ConnectionStrings": {
     "database": "<Connection str>"
@@ -49,10 +52,10 @@ az keyvault secret show --name 'ConnectionStrings' --vault-name 'dev-pre-agendam
 ```
 y luego ejecutar;
 ```sh
-$ dotnet run
+$ dotnet run --project ms-pre-agendamiento/ms-pre-agendamiento.csproj
 ```
 #### 3.3 Usando docker
-actualizar appsettings.json con el string de conección a la base de datos
+actualizar ms-pre-agendamiento/appsettings.json con el string de conección a la base de datos
 ```json
 "ConnectionStrings": {
     "database": "<Connection str>"
@@ -63,7 +66,7 @@ $ docker build ms-pre-agendamiento/ -t preagendamiento:local
 $ docker run -d -p 5000:80 preagendamiento:local
 ```
 #### 3.4 Usando kubectl
-actualizar manifests/deployment.yml con el string de conección a la base de datos
+actualizar ms-pre-agendamiento/manifests/deployment.yml con el string de conección a la base de datos
 y la imagen
 ```yaml
 env:
@@ -71,6 +74,13 @@ env:
       value: "<Connection str>"
 ```
 ```sh
-$ kubectl create -f manifests/deployment.yml
-$ kubectl create -f manifests/service.yml
+$ kubectl create -f ms-pre-agendamiento/manifests/deployment.yml
+$ kubectl create -f ms-pre-agendamiento/manifests/service.yml
+```
+### 3.- Test
+```sh
+$ make me-happy
+```
+```sh
+$ dotnet test
 ```
