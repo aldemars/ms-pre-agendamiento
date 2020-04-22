@@ -8,5 +8,6 @@ namespace ms_pre_agendamiento.Models
         public string Name { set; get; }
         [JsonIgnore]
         public string Password { set; get; }
+        public string Token { set; get; }
     }
 }

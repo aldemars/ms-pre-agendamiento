@@ -30,9 +30,9 @@ namespace ms_pre_agendamiento.Repository
             return user;
         }
 
-        public Boolean isValid(DTO.User user)
+        public User getUser(DTO.User user)
         {
-            return GetByUserNameAndPassword(user.Name, user.Password) != null;
+            return GetByUserNameAndPassword(user.Name, user.Password);
         }
     }
 

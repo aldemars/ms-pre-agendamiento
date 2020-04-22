@@ -7,7 +7,7 @@ namespace ms_pre_agendamiento.Repository
     {
         User GetById(int id);
         User GetByUserNameAndPassword(string username, string password);
-        
-        Boolean isValid(DTO.User user);
+        User getUser(DTO.User user);
+
     }
 }
