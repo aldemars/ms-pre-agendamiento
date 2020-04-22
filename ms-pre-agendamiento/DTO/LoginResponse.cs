@@ -1,12 +1,13 @@
-namespace ms_pre_agendamiento.DTO
+using System.Text.Json.Serialization;
+
+namespace ms_pre_agendamiento.Dto
 {
     public class LoginResponse
     {
-            public string Token { set; get; }
-
-            public LoginResponse(string token)
-            {
-                Token = token;
-            }
+        public string Id { set; get; }
+        public string Name { set; get; }
+        [JsonIgnore]
+        public string Password { set; get; }
+        public string Token { set; get; }
     }
 }

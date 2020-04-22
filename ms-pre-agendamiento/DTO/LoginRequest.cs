@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ms_pre_agendamiento.DTO
+namespace ms_pre_agendamiento.Dto
 {
-    public class User
+    public class LoginRequest
     {
         [Required]
         public string Name { set; get; }

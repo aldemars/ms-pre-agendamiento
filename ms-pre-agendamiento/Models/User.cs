@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using ms_pre_agendamiento.Dto;
 
 namespace ms_pre_agendamiento.Models
 {
@@ -6,8 +7,13 @@ namespace ms_pre_agendamiento.Models
     {
         public string Id { set; get; }
         public string Name { set; get; }
-        [JsonIgnore]
         public string Password { set; get; }
-        public string Token { set; get; }
+        
+        public LoginResponse MapToUserResponse(string token)
+        {
+            return new LoginResponse {Id = Id, Name = Name, Token = token};
+        }
     }
+    
+    
 }

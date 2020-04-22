@@ -7,7 +7,7 @@ namespace ms_pre_agendamiento.Repository
     {
         User GetById(int id);
         User GetByUserNameAndPassword(string username, string password);
-        User getUser(DTO.User user);
+        User GetUser(Dto.LoginRequest loginRequest);
 
     }
 }

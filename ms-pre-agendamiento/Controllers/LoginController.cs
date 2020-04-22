@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using ms_pre_agendamiento.DTO;
+using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
 {
     [AllowAnonymous]
     [ApiController, Route("[controller]")]
-    public class Login : ControllerBase
+    public class LoginController : ControllerBase
     {
         private readonly SymmetricSecurityKey _mySecurityKey;
 
@@ -24,7 +24,7 @@ namespace ms_pre_agendamiento.Controllers
         private readonly string _issuer;
 
 
-        public Login(IUserRepository userRepository, IConfiguration configuration)
+        public LoginController(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             var secret = configuration.GetSection("AppSettings")["Secret"];
@@ -34,9 +34,9 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] User userDto)
+        public IActionResult Login([FromBody] LoginRequest loginRequestDto)
         {
-            Models.User user = _userRepository.getUser(userDto);
+            Models.User user = _userRepository.GetUser(loginRequestDto);
             if (user == null) return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -48,14 +48,13 @@ namespace ms_pre_agendamiento.Controllers
                     new Claim(ClaimTypes.Name, user.Name),
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
-                Issuer = _issuer,
                 SigningCredentials = new SigningCredentials(_mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
             HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, null, new AuthenticationProperties());
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            user.Token = tokenHandler.WriteToken(token);
-            return new ObjectResult(user);
+            var userResponse = user.MapToUserResponse(tokenHandler.WriteToken(token));
+            return new ObjectResult(userResponse);
         }
     }
 }

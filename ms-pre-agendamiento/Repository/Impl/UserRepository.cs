@@ -30,9 +30,9 @@ namespace ms_pre_agendamiento.Repository
             return user;
         }
 
-        public User getUser(DTO.User user)
+        public User GetUser(Dto.LoginRequest loginRequest)
         {
-            return GetByUserNameAndPassword(user.Name, user.Password);
+            return GetByUserNameAndPassword(loginRequest.Name, loginRequest.Password);
         }
     }
 
