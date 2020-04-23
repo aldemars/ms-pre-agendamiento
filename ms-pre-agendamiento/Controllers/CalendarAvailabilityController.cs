@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Models.Request;
 
 namespace ms_pre_agendamiento.Controllers
 {
-    [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
-    public class CalendarAvailabilityController
+    [ApiController, Route("[controller]")]
+    public class CalendarAvailabilityController  : ControllerBase
     {
         private readonly ICalendarAvailabilityService _calendarAvailabilityService;
 
@@ -24,6 +26,8 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpGet]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetAvailableSlots()
         {
             var availableBlocks = _calendarAvailabilityService.GetAvailableBlocks();
@@ -36,13 +40,15 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpPost]
-        public Calendar GetCalendarWithAvailableTimeSlots([FromBody] CalendarRequest calendarRequest)
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetCalendarWithAvailableTimeSlots([FromBody] CalendarRequest calendarRequest)
         {
-            return new Calendar(
+            return Ok(new Calendar(
                 calendarRequest.From,
                 calendarRequest.To,
                 GetAvailableSlotsFromService().ToList()
-            );
+            ));
         }
     }
 }

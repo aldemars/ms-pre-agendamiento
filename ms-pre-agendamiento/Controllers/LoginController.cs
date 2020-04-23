@@ -1,14 +1,15 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mime;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ms_pre_agendamiento.Dto;
+using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
@@ -20,23 +21,22 @@ namespace ms_pre_agendamiento.Controllers
         private readonly SymmetricSecurityKey _mySecurityKey;
 
         private readonly IUserRepository _userRepository;
-        
-        private readonly string _issuer;
-
 
         public LoginController(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             var secret = configuration.GetSection("AppSettings")["Secret"];
-            _issuer = configuration.GetSection("AppSettings")["Issuer"];
             _mySecurityKey =
                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
         }
 
         [HttpPost]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Login([FromBody] LoginRequest loginRequestDto)
         {
-            Models.User user = _userRepository.GetUser(loginRequestDto);
+            User user = _userRepository.GetUser(loginRequestDto);
             if (user == null) return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -51,10 +51,9 @@ namespace ms_pre_agendamiento.Controllers
                 SigningCredentials = new SigningCredentials(_mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
-            HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, null, new AuthenticationProperties());
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var userResponse = user.MapToUserResponse(tokenHandler.WriteToken(token));
-            return new ObjectResult(userResponse);
+            return Ok(userResponse);
         }
     }
 }

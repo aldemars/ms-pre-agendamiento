@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Service;
@@ -9,8 +10,8 @@ using ms_pre_agendamiento.Service;
 namespace ms_pre_agendamiento.Controllers
 {
     //[Authorize(Policy = "isAlvaro")]
-    [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
-    public class HealthCareFacilitiesController
+    [ApiController, Route("[controller]")]
+    public class HealthCareFacilitiesController  : ControllerBase
     {
         private readonly IHealthCareFacilityService _healthcareFacilityService;
         private readonly ICalendarAvailabilityService _calendarAvailabilityService;
@@ -30,6 +31,8 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [HttpGet]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetHealthCareFacilities()
         {
             var availableBlocks = GetAvailableSlotsFromService();
@@ -48,7 +51,7 @@ namespace ms_pre_agendamiento.Controllers
                 {keyCenterDictionary, healthCareFacilities}
             };
 
-            return new ObjectResult(centers);
+            return Ok(centers);
         }
     }
 }
