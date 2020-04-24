@@ -89,8 +89,8 @@ namespace ms_pre_agendamiento
                 });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("isAlvaro", policy => 
-                    policy.RequireClaim(ClaimTypes.NameIdentifier, "1"));
+                options.AddPolicy("isScheduler", policy => 
+                    policy.RequireClaim(ClaimTypes.Role, "scheduler"));
             });
         }
 
@@ -98,7 +98,10 @@ namespace ms_pre_agendamiento
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             _logger = logger;
-            CheckDatabaseMigrations();
+            if (env.EnvironmentName != "Test")
+            {
+                CheckDatabaseMigrations();
+            }
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

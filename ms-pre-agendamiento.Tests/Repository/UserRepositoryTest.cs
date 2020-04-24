@@ -1,4 +1,5 @@
 using System;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace ms_pre_agendamiento.Tests.Repository
             User expected = new User() {Id = "1", Name = "myName", Password = "superSecure"};
             var command = new Mock<IRepositoryCommandExecuter>();
             command
-                .Setup(c => c.ExecuteCommand<User>(It.IsAny<Func<SqlConnection, User>>()))
+                .Setup(c => c.ExecuteCommand<User>(It.IsAny<Func<DbConnection, User>>()))
                 .Returns((Func<SqlConnection, User> task) => { return expected; });
 
             return command.Object;
@@ -46,6 +47,7 @@ namespace ms_pre_agendamiento.Tests.Repository
         public void ShouldReturnValidUserWhenIsRequestedById()
         {
             string expectedID = "1";
+            string expectedName = "myName";
             string expectedPassword = "superSecure";
             // Arrange
             var command = SetupMock();
@@ -58,7 +60,8 @@ namespace ms_pre_agendamiento.Tests.Repository
 
             // Assert
             Assert.Equal(expectedID, userResult.Id);
-            Assert.Equal("myName", userResult.Name);
+            Assert.Equal(expectedName, userResult.Name);
+            Assert.Equal(expectedPassword, userResult.Password);
         }
     }
 }

@@ -1,0 +1,1 @@
+ALTER TABLE sel_user ADD role VARCHAR(100) not null DEFAULT 'scheduler';

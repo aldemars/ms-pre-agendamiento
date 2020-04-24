@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ms_pre_agendamiento.Models;
@@ -9,7 +10,7 @@ using ms_pre_agendamiento.Service;
 
 namespace ms_pre_agendamiento.Controllers
 {
-    //[Authorize(Policy = "isAlvaro")]
+    [Authorize(Policy = "isScheduler")]
     [ApiController, Route("[controller]")]
     public class HealthCareFacilitiesController  : ControllerBase
     {

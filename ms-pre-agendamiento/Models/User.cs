@@ -8,6 +8,7 @@ namespace ms_pre_agendamiento.Models
         public string Id { set; get; }
         public string Name { set; get; }
         public string Password { set; get; }
+        public string Role { set; get; }
         
         public LoginResponse MapToUserResponse(string token)
         {

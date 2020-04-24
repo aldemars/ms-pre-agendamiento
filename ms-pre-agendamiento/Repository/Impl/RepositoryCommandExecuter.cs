@@ -1,4 +1,5 @@
 using System;
+using System.Data.Common;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
@@ -14,7 +15,7 @@ namespace ms_pre_agendamiento.Repository
             _connStr = configuration.GetConnectionString(connectionStringKey);
         }
         
-        public void ExecuteCommand(Action<SqlConnection> task)
+        public void ExecuteCommand(Action<DbConnection> task)
         {
             using (var conn = new SqlConnection(_connStr))
             {
@@ -23,7 +24,7 @@ namespace ms_pre_agendamiento.Repository
                 task(conn);
             }
         }
-        public T ExecuteCommand<T>(Func<SqlConnection, T> task)
+        public T ExecuteCommand<T>(Func<DbConnection, T> task)
         {
             using (var conn = new SqlConnection(_connStr))
             {

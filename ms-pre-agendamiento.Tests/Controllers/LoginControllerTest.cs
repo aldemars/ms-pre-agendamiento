@@ -14,8 +14,6 @@ namespace ms_pre_agendamiento.Tests.Controllers
 {
     public class LoginControllerTest
     {
-        private string APP_SETTING = "AppSettings";
-
         private LoginController SetupLoginController(User user, LoginRequest loginRequest)
         {
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
@@ -43,7 +41,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
             var loginRequest = new LoginRequest {Name = "testName", Password = "password"};
 
             User user = new User
-                {Id = "1", Name = loginRequest.Name, Password = loginRequest.Password};
+                {Id = "1", Name = loginRequest.Name, Password = loginRequest.Password, Role = "scheduler"};
 
             var loginController = SetupLoginController(user, loginRequest);
             var result = loginController.Login(loginRequest);
