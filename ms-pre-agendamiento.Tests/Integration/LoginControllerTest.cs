@@ -23,12 +23,11 @@ namespace ms_pre_agendamiento.Tests.Integration
         {
             // Arrange
             var client = _factory.CreateClient();
-
-            var payload = "{\"name\": \"name\",\"password\": \"password\"}";
-
-            HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
+            const string payload = "{\"name\": \"name\",\"password\": \"password\"}";
+            HttpContent httpContent = new StringContent(payload, Encoding.UTF8, "application/json");
+            
             // Act
-            var response = await client.PostAsync(url,c);
+            var response = await client.PostAsync(url,httpContent);
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299

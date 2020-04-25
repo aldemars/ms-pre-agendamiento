@@ -15,11 +15,11 @@ namespace ms_pre_agendamiento.Tests.Repository
     {
         private IRepositoryCommandExecuter SetupMock()
         {
-            User expected = new User() {Id = "1", Name = "myName", Password = "superSecure"};
+            var expected = new User() {Id = "1", Name = "myName", Password = "superSecure"};
             var command = new Mock<IRepositoryCommandExecuter>();
             command
-                .Setup(c => c.ExecuteCommand<User>(It.IsAny<Func<DbConnection, User>>()))
-                .Returns((Func<SqlConnection, User> task) => { return expected; });
+                .Setup(c => c.ExecuteCommand(It.IsAny<Func<DbConnection, User>>()))
+                .Returns((Func<SqlConnection, User> task) => expected);
 
             return command.Object;
         }
@@ -27,8 +27,8 @@ namespace ms_pre_agendamiento.Tests.Repository
         [Fact]
         public void ShouldReturnValidUserWhenIsRequestedByUserNameAndPassword()
         {
-            string expectedName = "myName";
-            string expectedPassword = "superSecure";
+            const string expectedName = "myName";
+            const string expectedPassword = "superSecure";
             // Arrange
             var command = SetupMock();
 
@@ -36,7 +36,7 @@ namespace ms_pre_agendamiento.Tests.Repository
                 new UserRepository(command);
 
             // Act
-            User userResult = userRepository.GetByUserNameAndPassword(expectedName, expectedPassword);
+            var userResult = userRepository.GetByUserNameAndPassword(expectedName, expectedPassword);
 
             // Assert
             Assert.Equal(expectedName, userResult.Name);
@@ -46,9 +46,9 @@ namespace ms_pre_agendamiento.Tests.Repository
         [Fact]
         public void ShouldReturnValidUserWhenIsRequestedById()
         {
-            string expectedID = "1";
-            string expectedName = "myName";
-            string expectedPassword = "superSecure";
+            const string expectedID = "1";
+            const string expectedName = "myName";
+            const string expectedPassword = "superSecure";
             // Arrange
             var command = SetupMock();
 
@@ -56,7 +56,7 @@ namespace ms_pre_agendamiento.Tests.Repository
                 new UserRepository(command);
 
             // Act
-            User userResult = userRepository.GetById(1);
+            var userResult = userRepository.GetById(1);
 
             // Assert
             Assert.Equal(expectedID, userResult.Id);

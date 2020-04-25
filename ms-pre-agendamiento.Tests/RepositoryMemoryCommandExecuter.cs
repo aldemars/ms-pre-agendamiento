@@ -14,7 +14,7 @@ namespace ms_pre_agendamiento.Tests
         public RepositoryMemoryCommandExecuter(IConfiguration configuration)
         {
             _configuration = configuration;
-            string connStr = configuration.GetConnectionString("database");
+            var connStr = configuration.GetConnectionString("database");
             cnx = new SqliteConnection(connStr);
             CheckDatabaseMigrations();
         }

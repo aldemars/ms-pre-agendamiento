@@ -14,6 +14,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
         {
             var userRepository = new Mock<IUserRepository>();
             userRepository.Setup((u) => u.GetById(1)).Returns(() => user);
+            
             return new UserController(userRepository.Object);
         }
 
@@ -29,7 +30,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
         [Fact]
         public void ShouldReturnOkWhenUserIdIsValid()
         {
-            User user = new User
+            var user = new User
                 {Id = "1", Name = "name", Password = "password"};
             var userController = SetupUserController(user);
             var result = userController.Get(1);

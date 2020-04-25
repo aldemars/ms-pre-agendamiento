@@ -16,12 +16,12 @@ namespace ms_pre_agendamiento.Tests.Controllers
     {
         private LoginController SetupLoginController(User user, LoginRequest loginRequest)
         {
-            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+            var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddJsonFile("appsettings.json");
 
             var userRepository = new Mock<IUserRepository>();
-
             userRepository.Setup((u) => u.GetUser(loginRequest)).Returns(() => user);
+            
             return new LoginController(userRepository.Object, configurationBuilder.Build());
         }
 
@@ -40,7 +40,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
         {
             var loginRequest = new LoginRequest {Name = "testName", Password = "password"};
 
-            User user = new User
+            var user = new User
                 {Id = "1", Name = loginRequest.Name, Password = loginRequest.Password, Role = "scheduler"};
 
             var loginController = SetupLoginController(user, loginRequest);
