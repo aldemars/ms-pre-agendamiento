@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ms_pre_agendamiento.Dto;
-using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
@@ -36,7 +35,7 @@ namespace ms_pre_agendamiento.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Login([FromBody] LoginRequest loginRequestDto)
         {
-            User user = _userRepository.GetUser(loginRequestDto);
+            var user = _userRepository.GetUser(loginRequestDto);
             if (user == null) return Unauthorized();
 
             var tokenHandler = new JwtSecurityTokenHandler();

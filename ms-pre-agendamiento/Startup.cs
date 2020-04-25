@@ -67,7 +67,7 @@ namespace ms_pre_agendamiento
             services.AddTransient<IUserRepository, UserRepository>();
 
             // configure jwt authentication
-            string strKey = Configuration.GetSection("AppSettings")["Secret"];
+            var strKey = Configuration.GetSection("AppSettings")["Secret"];
             var key = Encoding.ASCII.GetBytes(strKey);
             services.AddAuthentication(options =>
                 {

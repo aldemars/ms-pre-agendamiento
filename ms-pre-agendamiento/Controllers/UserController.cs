@@ -1,7 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
@@ -23,7 +22,7 @@ namespace ms_pre_agendamiento.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Get(int id)
         {
-            User user = _userRepository.GetById(id);
+            var user = _userRepository.GetById(id);
 
             if (user == null)
             {
