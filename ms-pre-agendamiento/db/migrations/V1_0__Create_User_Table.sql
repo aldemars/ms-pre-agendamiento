@@ -1,5 +1,5 @@
 CREATE TABLE sel_user (
-  id INTEGER PRIMARY KEY IDENTITY (1,1),
+  id SERIAL PRIMARY KEY,
   name VARCHAR(100) not null UNIQUE,
   password VARCHAR(100) not null
 );

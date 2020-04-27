@@ -16,6 +16,7 @@ using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
 using ms_pre_agendamiento.Service.Impl;
+using Npgsql;
 using Polly;
 
 namespace ms_pre_agendamiento
@@ -129,7 +130,7 @@ namespace ms_pre_agendamiento
         {
             try
             {
-                var cnx = new SqlConnection(Configuration.GetConnectionString("database"));
+                var cnx = new NpgsqlConnection(Configuration.GetConnectionString("database"));
                 var location = Configuration.GetSection("AppSettings")["Evolve.Location"];
                 var evolve = new Evolve.Evolve(cnx)
                 {

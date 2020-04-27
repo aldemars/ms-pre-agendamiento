@@ -2,6 +2,7 @@ using System;
 using System.Data.Common;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace ms_pre_agendamiento.Repository
 {
@@ -17,7 +18,7 @@ namespace ms_pre_agendamiento.Repository
         
         public void ExecuteCommand(Action<DbConnection> task)
         {
-            using (var conn = new SqlConnection(_connStr))
+            using (var conn = new  NpgsqlConnection(_connStr))
             {
                 conn.Open();
 
@@ -26,7 +27,7 @@ namespace ms_pre_agendamiento.Repository
         }
         public T ExecuteCommand<T>(Func<DbConnection, T> task)
         {
-            using (var conn = new SqlConnection(_connStr))
+            using (var conn = new NpgsqlConnection(_connStr))
             {
                 conn.Open();
 
