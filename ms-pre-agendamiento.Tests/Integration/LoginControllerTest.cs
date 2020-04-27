@@ -17,17 +17,17 @@ namespace ms_pre_agendamiento.Tests.Integration
             _factory = factory;
         }
 
-        [Theory]
-        [InlineData("/login")]
-        public async Task Login_ShouldReturnUnAuthorizeWhenUserIsInvalid(string url)
+        [Fact]
+        public async Task ShouldReturnOKResponseWhenUserIsvalid()
         {
             // Arrange
             var client = _factory.CreateClient();
-            const string payload = "{\"name\": \"name\",\"password\": \"password\"}";
-            HttpContent httpContent = new StringContent(payload, Encoding.UTF8, "application/json");
-            
+
+            var payload = "{\"name\": \"genericUser\",\"password\": \"password\"}";
+
+            HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
             // Act
-            var response = await client.PostAsync(url,httpContent);
+            var response = await client.PostAsync("/Login",c);
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
@@ -36,7 +36,7 @@ namespace ms_pre_agendamiento.Tests.Integration
             var result = response.Content.ReadAsStringAsync().Result;
             var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(result);
             Assert.NotNull(loginResponse.Token);
-        } 
+        }
             
     }
 }
