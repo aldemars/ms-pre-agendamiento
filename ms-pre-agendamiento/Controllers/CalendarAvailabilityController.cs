@@ -22,6 +22,7 @@ namespace ms_pre_agendamiento.Controllers
                 calendarAvailabilityService ?? throw new ArgumentNullException("CalendarAvailabilityService");
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IEnumerable<TimeSlot> GetAvailableSlotsFromService()
         {
             return _calendarAvailabilityService.GetAvailableBlocks();
