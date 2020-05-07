@@ -1,12 +1,9 @@
 using System;
 using System.Data.Common;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using Dapper;
 using Moq;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
+using Npgsql;
 using Xunit;
 
 namespace ms_pre_agendamiento.Tests.Repository
@@ -19,7 +16,7 @@ namespace ms_pre_agendamiento.Tests.Repository
             var command = new Mock<IRepositoryCommandExecuter>();
             command
                 .Setup(c => c.ExecuteCommand(It.IsAny<Func<DbConnection, User>>()))
-                .Returns((Func<SqlConnection, User> task) => expected);
+                .Returns((Func<NpgsqlConnection, User> task) => expected);
 
             return command.Object;
         }

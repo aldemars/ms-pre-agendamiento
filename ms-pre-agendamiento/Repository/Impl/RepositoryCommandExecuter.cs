@@ -33,5 +33,21 @@ namespace ms_pre_agendamiento.Repository
                 return task(conn);
             }
         }
+        
+        
+        public void HealthCheck()
+        {
+            using (var connection = new NpgsqlConnection(_connStr))
+            {
+                try
+                {
+                    connection.Open();
+                }
+                catch (NpgsqlException e)
+                { 
+                   throw new Exception(e.Message);
+                }
+            }
+        }
     }
 }

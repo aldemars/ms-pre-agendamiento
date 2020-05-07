@@ -20,11 +20,13 @@ namespace ms_pre_agendamiento.Controllers
         private readonly SymmetricSecurityKey _mySecurityKey;
 
         private readonly IUserRepository _userRepository;
+        private readonly int _expire;
 
         public LoginController(IUserRepository userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             var secret = configuration.GetSection("AppSettings")["Secret"];
+            _expire = Int32.Parse(configuration.GetSection("AppSettings")["TokenExpire"]);
             _mySecurityKey =
                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
         }
@@ -47,7 +49,7 @@ namespace ms_pre_agendamiento.Controllers
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Role, user.Role),
                 }),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.UtcNow.AddDays(_expire),
                 SigningCredentials = new SigningCredentials(_mySecurityKey, SecurityAlgorithms.HmacSha256Signature)
             };
 
