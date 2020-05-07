@@ -1,7 +1,6 @@
-using System;
 using System.Linq;
 using Dapper;
-using Microsoft.Extensions.Configuration;
+using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
 
 namespace ms_pre_agendamiento.Repository
@@ -30,7 +29,7 @@ namespace ms_pre_agendamiento.Repository
             return user;
         }
 
-        public User GetUser(Dto.LoginRequest loginRequest)
+        public User GetUser(LoginRequest loginRequest)
         {
             return GetByUserNameAndPassword(loginRequest.Name, loginRequest.Password);
         }

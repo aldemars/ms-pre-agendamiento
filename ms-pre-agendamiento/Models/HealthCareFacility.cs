@@ -10,8 +10,8 @@ namespace ms_pre_agendamiento.Models
         
         public string Address { set; get; }
         
-        public DateTime WorkingHoursFrom { set; get; }
+        public int WorkingHoursFrom { set; get; }
         
-        public DateTime WorkingHoursTo { set; get; }
+        public int WorkingHoursTo { set; get; }
     }
 }

@@ -66,7 +66,8 @@ namespace ms_pre_agendamiento
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "My API", Version = "v1"}); });
             services.AddTransient<IRepositoryCommandExecuter, RepositoryCommandExecuter>();
             services.AddTransient<IUserRepository, UserRepository>();
-
+            services.AddTransient<IHealthCareFacilityRepository, HealthCareFacilityRepository>();
+            
             // configure jwt authentication
             var strKey = Configuration.GetSection("AppSettings")["Secret"];
             var key = Encoding.ASCII.GetBytes(strKey);
