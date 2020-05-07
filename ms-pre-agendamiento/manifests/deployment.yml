@@ -15,5 +15,7 @@ spec:
           env:
             - name: ConnectionStrings__database
               value: "${ConnectionStrings}"
+            - name: AppSettings__Env
+              value: "${Env}"  
           ports:
           - containerPort: 80 

@@ -8,5 +8,6 @@ namespace ms_pre_agendamiento.Repository
     {
         void ExecuteCommand(Action<DbConnection> task);
         T ExecuteCommand<T>(Func<DbConnection, T> task);
+        void HealthCheck();
     }
 }

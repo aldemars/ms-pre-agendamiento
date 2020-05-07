@@ -2,6 +2,7 @@ using System;
 using System.Data.Common;
 using System.Linq;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
@@ -39,6 +40,11 @@ namespace ms_pre_agendamiento.Tests
         public T ExecuteCommand<T>(Func<DbConnection, T> task)
         {
             return SetupMock().ExecuteCommand(task);
+        }
+
+        public void HealthCheck()
+        {
+            
         }
     }
 }

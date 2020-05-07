@@ -34,6 +34,11 @@ namespace ms_pre_agendamiento.Repository
         {
             return GetByUserNameAndPassword(loginRequest.Name, loginRequest.Password);
         }
+
+        public void HealthCheck()
+        {
+            _command.HealthCheck();
+        }
     }
 
     public class UserCommand
