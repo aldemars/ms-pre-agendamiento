@@ -34,7 +34,7 @@ namespace ms_pre_agendamiento.Controllers
         [HttpGet]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetHealthCareFacilities()
+        public IActionResult GetHealthCareFacilitiesFromExternalAPI()
         {
             var availableBlocks = GetAvailableSlotsFromService();
 
@@ -54,5 +54,8 @@ namespace ms_pre_agendamiento.Controllers
 
             return Ok(centers);
         }
+        
+        
+        
     }
 }
