@@ -31,5 +31,22 @@ namespace ms_pre_agendamiento.Controllers
 
             return Ok(user);
         }
+
+        [Route("{id:int}/appointment")]
+        [HttpGet(Name = "GetUserApointments")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetUserAppointments(int id)
+        {
+            var user = _userRepository.GetUserAppointmentsById(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
     }
 }

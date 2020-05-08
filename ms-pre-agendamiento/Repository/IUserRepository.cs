@@ -13,5 +13,7 @@ namespace ms_pre_agendamiento.Repository
         
         void HealthCheck();
 
+        User GetUserAppointmentsById(int id);
+
     }
 }

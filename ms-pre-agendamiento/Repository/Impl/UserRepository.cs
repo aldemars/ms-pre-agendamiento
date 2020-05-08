@@ -34,6 +34,18 @@ namespace ms_pre_agendamiento.Repository
             return GetByUserNameAndPassword(loginRequest.Name, loginRequest.Password);
         }
 
+        public User GetUserAppointmentsById(int id)
+        {
+            var user = _command.ExecuteCommand<User>(conn =>
+            {
+                var result = conn.QueryMultiple(UserCommand.GetUserAppointmentsById, new {@Id = id});
+                var user = result.ReadSingle<User>();
+                user.Appointments = result.Read<Appointment>().AsList();
+                return user;
+            });
+            return user;
+        }
+
         public void HealthCheck()
         {
             _command.HealthCheck();
@@ -46,5 +58,9 @@ namespace ms_pre_agendamiento.Repository
 
         public static string GetByUserNameAndPassword =>
             "Select * From sel_user where name= @Name  AND password= @Password";
+        
+        public static string GetUserAppointmentsById => 
+            @"Select * From sel_user where Id= @Id;
+            Select * From appointment where user_id= @Id";
     }
 }
