@@ -2,6 +2,8 @@ using System;
 using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using Dapper.FluentMap;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ms_pre_agendamiento.Dto;
+using ms_pre_agendamiento.Models;
+using ms_pre_agendamiento.Models.Mappers;
 using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
@@ -94,6 +99,11 @@ namespace ms_pre_agendamiento
                 options.AddPolicy("isScheduler", policy => 
                     policy.RequireClaim(ClaimTypes.Role, "scheduler"));
             });
+            FluentMapper.Initialize(config => {
+                config.AddMap(new AppointmentMap());
+            });
+            
+            services.AddAutoMapper(typeof(MapperProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

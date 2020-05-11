@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +8,10 @@ using Moq;
 using ms_pre_agendamiento.Controllers;
 using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
+using ms_pre_agendamiento.Models.Mappers;
 using ms_pre_agendamiento.Repository;
 using Xunit;
+using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace ms_pre_agendamiento.Tests.Controllers
 {
@@ -18,11 +21,16 @@ namespace ms_pre_agendamiento.Tests.Controllers
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddJsonFile("appsettings.json");
+            var config = new MapperConfiguration(cfg =>
+            {
+                // Add all profiles in current assembly
+                cfg.AddProfile<MapperProfile>();
+            });
 
             var userRepository = new Mock<IUserRepository>();
             userRepository.Setup((u) => u.GetUser(loginRequest)).Returns(() => user);
-            
-            return new LoginController(userRepository.Object, configurationBuilder.Build());
+            IMapper mapper = new Mapper(config);
+            return new LoginController(userRepository.Object, configurationBuilder.Build(), mapper);
         }
 
         [Fact]

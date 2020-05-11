@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mime;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,12 @@ namespace ms_pre_agendamiento.Controllers
 
         private readonly IUserRepository _userRepository;
         private readonly int _expire;
+        private readonly IMapper _mapper;
 
-        public LoginController(IUserRepository userRepository, IConfiguration configuration)
+        public LoginController(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
             var secret = configuration.GetSection("AppSettings")["Secret"];
             _expire = Int32.Parse(configuration.GetSection("AppSettings")["TokenExpire"]);
             _mySecurityKey =
@@ -54,8 +57,9 @@ namespace ms_pre_agendamiento.Controllers
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var userResponse = user.MapToUserResponse(tokenHandler.WriteToken(token));
-            return Ok(userResponse);
+            var loginResponse= _mapper.Map<LoginResponse>(user);
+            loginResponse.Token = tokenHandler.WriteToken(token);
+            return Ok(loginResponse);
         }
     }
 }

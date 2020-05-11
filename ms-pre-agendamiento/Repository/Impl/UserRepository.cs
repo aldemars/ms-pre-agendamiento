@@ -1,5 +1,7 @@
 using System.Linq;
 using Dapper;
+using Dapper.FluentMap;
+using Dapper.FluentMap.Mapping;
 using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
 
@@ -51,7 +53,15 @@ namespace ms_pre_agendamiento.Repository
             _command.HealthCheck();
         }
     }
-
+    
+    internal class AppointmentMap : EntityMap<Appointment>
+    {
+        internal AppointmentMap()
+        {
+            Map(u => u.SlotId).ToColumn("slot_id");
+            Map(u => u.HealthcareFacilityId).ToColumn("healthcare_facility_id");
+        }
+    }
     public class UserCommand
     {
         public static string GetById => "Select * From sel_user where Id= @Id";

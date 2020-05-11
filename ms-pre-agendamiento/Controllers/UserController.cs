@@ -1,6 +1,8 @@
 using System.Net.Mime;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
@@ -9,10 +11,12 @@ namespace ms_pre_agendamiento.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         [Route("{id:int}")]
@@ -46,7 +50,7 @@ namespace ms_pre_agendamiento.Controllers
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(_mapper.Map<UserResponse>(user));
         }
     }
 }

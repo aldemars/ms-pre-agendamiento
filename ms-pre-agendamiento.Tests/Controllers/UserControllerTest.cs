@@ -1,8 +1,10 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using ms_pre_agendamiento.Controllers;
 using ms_pre_agendamiento.Models;
+using ms_pre_agendamiento.Models.Mappers;
 using ms_pre_agendamiento.Repository;
 using Xunit;
 
@@ -14,8 +16,13 @@ namespace ms_pre_agendamiento.Tests.Controllers
         {
             var userRepository = new Mock<IUserRepository>();
             userRepository.Setup((u) => u.GetById(1)).Returns(() => user);
+            var config = new MapperConfiguration(cfg =>
+            {
+                // Add all profiles in current assembly
+                cfg.AddProfile<MapperProfile>();
+            });
             
-            return new UserController(userRepository.Object);
+            return new UserController(userRepository.Object, new Mapper(config));
         }
 
         [Fact]
