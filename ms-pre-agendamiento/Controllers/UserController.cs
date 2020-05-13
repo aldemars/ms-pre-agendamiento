@@ -19,8 +19,8 @@ namespace ms_pre_agendamiento.Controllers
             _mapper = mapper;
         }
 
-        [Route("{id:int}")]
-        [HttpGet("user")]
+        [Route("{id}")]
+        [HttpGet("{id}")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -36,14 +36,14 @@ namespace ms_pre_agendamiento.Controllers
             return Ok(user);
         }
 
-        [Route("{id:int}/appointment")]
-        [HttpGet("apointments")]
+        [Route("{userId}/appointment")]
+        [HttpGet("{userId}/appointment")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetUserAppointments(int id)
+        public IActionResult GetUserAppointments(int userId)
         {
-            var user = _userRepository.GetUserAppointmentsById(id);
+            var user = _userRepository.GetUserAppointmentsById(userId);
 
             if (user == null)
             {
