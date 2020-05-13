@@ -71,6 +71,6 @@ namespace ms_pre_agendamiento.Repository
         
         public static string GetUserAppointmentsById => 
             @"Select * From sel_user where Id= @Id;
-            Select * From appointment where user_id= @Id";
+            Select id, slot_id, description, date, hour, healthcare_facility_id, 'userAppointment' as type From appointment where user_id= @Id";
     }
 }

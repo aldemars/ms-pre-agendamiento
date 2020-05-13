@@ -22,6 +22,8 @@ namespace ms_pre_agendamiento.Dto
                 return $"{this.Time.Hours}:{minutes}";
             }
         }
+        
+        public string Type { get; set; }
     }
 
     public class AppointmentTime

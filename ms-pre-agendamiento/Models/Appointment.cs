@@ -10,5 +10,7 @@ namespace ms_pre_agendamiento.Models
         public TimeSpan Hour { get; set; }
         public string SlotId { get; set; }
         public int HealthcareFacilityId { get; set; }
+        
+        public string Type { get; set; }
     }
 }
