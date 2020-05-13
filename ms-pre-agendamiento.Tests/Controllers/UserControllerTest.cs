@@ -77,7 +77,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
         [Fact]
         public void ShouldReturn404WhenUserIdIsNotValid()
         {    
-            
+
             var userController = SetupUserController(null);
             
             var result = userController.GetUserAppointments(2);

@@ -12,13 +12,23 @@ namespace ms_pre_agendamiento.Models.Mappers
         {
             CreateMap<TimeSpan, AppointmentTime>();
             CreateMap<Appointment, AppointmentResponse>()
-                .ForMember(dto => dto.Time, opt 
-                    => opt.MapFrom(src => src.Hour));
+                .ForMember(dto => dto.Time, opt
+                    => opt.MapFrom(src => src.Hour))
+                .ForMember("Date", opt 
+                    => opt.ConvertUsing(new DateTimeToStringConverter()));
             
             CreateMap<User, UserResponse>()
                 .ForMember(dto => dto.Appointments, opt 
                     => opt.MapFrom(src => src.Appointments));
             CreateMap<User, LoginResponse>();
+        }
+        
+        public class DateTimeToStringConverter : IValueConverter<DateTime, string>
+        {
+            public string Convert(DateTime datetime, ResolutionContext context)
+            {
+                return datetime.ToString("dd/M/yyyy");
+            }
         }
     }
 }

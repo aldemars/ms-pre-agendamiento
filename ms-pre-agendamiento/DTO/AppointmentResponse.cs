@@ -7,12 +7,21 @@ namespace ms_pre_agendamiento.Dto
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         
         [MapTo("Hour")]
         public AppointmentTime Time { get; set; }
         public string SlotId { get; set; }
         public String HealthcareFacility { get; set; }
+        
+        public string Hour
+        {
+            get
+            {
+                string minutes = (this.Time.Minutes < 10) ? $"0{this.Time.Minutes}" : $"{this.Time.Minutes}";
+                return $"{this.Time.Hours}:{minutes}";
+            }
+        }
     }
 
     public class AppointmentTime

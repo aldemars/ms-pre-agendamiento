@@ -7,7 +7,7 @@ using ms_pre_agendamiento.Repository;
 
 namespace ms_pre_agendamiento.Controllers
 {
-    [ApiController, ApiExplorerSettings(IgnoreApi = true), Route("[controller]")]
+    [ApiController, Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
