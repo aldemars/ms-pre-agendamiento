@@ -20,7 +20,7 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [Route("{id:int}")]
-        [HttpGet(Name = "GetUser")]
+        [HttpGet("user")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -37,7 +37,7 @@ namespace ms_pre_agendamiento.Controllers
         }
 
         [Route("{id:int}/appointment")]
-        [HttpGet(Name = "GetUserApointments")]
+        [HttpGet("apointments")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
