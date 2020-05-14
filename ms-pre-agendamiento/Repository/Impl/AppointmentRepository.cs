@@ -15,10 +15,10 @@ namespace ms_pre_agendamiento.Repository.Impl
             _command = command;
         }
 
-        public List<Appointment> GetAppointmentsByCenterId(int centerId)
+        public List<Appointment> GetAppointmentsByCenterId(int healthcareFacilityId)
         {
             return _command.ExecuteCommand<List<Appointment>>(conn =>
-                conn.Query<Appointment>(AppointmentCommand.GetAppointmentsByCenterId, new {@CenterId = centerId}).AsList());
+                conn.Query<Appointment>(AppointmentCommand.GetAppointmentsByCenterId, new {@HealthcareFacilityId = healthcareFacilityId}).AsList());
         }
 
         public List<Appointment> GetAppointmentsByUserId(int userId)
@@ -63,6 +63,6 @@ namespace ms_pre_agendamiento.Repository.Impl
         public static string GetUserAndCenterAppointments =>
             @"Select *, 'userAppointment' as type From appointment where user_id= @UserId;
               Select id, slot_id, 'Busy' as description, date, hour, 'centerAppointment' as type 
-                    From appointment where healthcare_facility_id= @CenterId AND user_id<> @UserId";
+                    From appointment where healthcare_facility_id= @HealthcareFacilityId AND user_id<> @UserId";
     }
 }
