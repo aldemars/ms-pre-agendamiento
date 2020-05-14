@@ -67,13 +67,12 @@ namespace ms_pre_agendamiento.Tests.Controllers
             
             var result = userController.GetUserAppointments(1);
             var objectResult = result as ObjectResult;
-            var objectResultValue = objectResult?.Value as UserResponse;
+            var objectResultValue = objectResult?.Value as List<AppointmentResponse>;
 
             Assert.Equal(StatusCodes.Status200OK, objectResult?.StatusCode);
-            Assert.Equal(user.Id, objectResultValue?.Id);
-            Assert.Equal(user.Name, objectResultValue?.Name);
-            Assert.NotEmpty(user.Appointments);
-            Assert.Single(user.Appointments);
+            Assert.NotEmpty(objectResultValue);
+            Assert.Single(objectResultValue);
+            
         }
         
         [Fact]

@@ -55,7 +55,7 @@ namespace ms_pre_agendamiento.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<UserResponse>(user));
+            return Ok(_mapper.Map<UserResponse>(user).Appointments);
         }
         
         [Route("{userId}/appointment/center/{centerId}")]

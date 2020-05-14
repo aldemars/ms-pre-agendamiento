@@ -51,6 +51,6 @@ namespace ms_pre_agendamiento.Repository.Impl
         
         public static string GetUserAndCenterAppointments =>
             @"Select *, 'userAppointment' as type From appointment where user_id= @UserId;
-              Select id, slot_id, 'busy' as description, date, hour, 'centerAppointment' as type From appointment where healthcare_facility_id= @CenterId AND user_id<> @UserId";
+              Select id, slot_id, 'Busy' as description, date, hour, 'centerAppointment' as type From appointment where healthcare_facility_id= @CenterId AND user_id<> @UserId";
     }
 }
