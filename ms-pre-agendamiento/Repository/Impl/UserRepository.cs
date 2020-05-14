@@ -54,14 +54,6 @@ namespace ms_pre_agendamiento.Repository
         }
     }
     
-    internal class AppointmentMap : EntityMap<Appointment>
-    {
-        internal AppointmentMap()
-        {
-            Map(u => u.SlotId).ToColumn("slot_id");
-            Map(u => u.HealthcareFacilityId).ToColumn("healthcare_facility_id");
-        }
-    }
     public class UserCommand
     {
         public static string GetById => "Select * From sel_user where Id= @Id";

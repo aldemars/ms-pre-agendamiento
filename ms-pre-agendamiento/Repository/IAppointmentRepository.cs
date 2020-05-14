@@ -8,6 +8,6 @@ namespace ms_pre_agendamiento.Repository
         List<Appointment> GetAppointmentsByCenterId(int centerId);
         List<Appointment> GetAppointmentsByUserId(int userId);
 
-        List<Appointment> GetUserAndCenterAppointments(int userId, int centerId);
+        List<Appointment> GetUserAndCenterAppointments(int userId, int healthcareFacilityId);
     }
 }

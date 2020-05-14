@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
-using ms_pre_agendamiento.Service;
 
 namespace ms_pre_agendamiento.Controllers
 {
@@ -14,13 +13,13 @@ namespace ms_pre_agendamiento.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        private readonly IUserService _userService;
+        private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IMapper mapper, IUserService userService)
+        public UserController(IUserRepository userRepository, IMapper mapper, IAppointmentRepository appointmentRepository)
         {
             _userRepository = userRepository;
-            _userService = userService;
+            _appointmentRepository = appointmentRepository;
             _mapper = mapper;
         }
 
@@ -71,7 +70,7 @@ namespace ms_pre_agendamiento.Controllers
             {
                 return NotFound();
             }
-            List<Appointment> appointments = _userService.GetUserAndCenterAppointments(userId, centerId);
+            List<Appointment> appointments = _appointmentRepository.GetUserAndCenterAppointments(userId,centerId);
 
             return Ok(_mapper.Map<List<AppointmentResponse>>(appointments));
         }

@@ -72,7 +72,6 @@ namespace ms_pre_agendamiento
             services.AddTransient<IRepositoryCommandExecuter, RepositoryCommandExecuter>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAppointmentRepository, AppointmentRepository>();
-            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IHealthCareFacilityRepository, HealthCareFacilityRepository>();
             
             // configure jwt authentication
