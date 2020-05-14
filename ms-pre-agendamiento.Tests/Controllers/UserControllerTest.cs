@@ -9,6 +9,7 @@ using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Models.Mappers;
 using ms_pre_agendamiento.Repository;
+using ms_pre_agendamiento.Service;
 using Xunit;
 
 namespace ms_pre_agendamiento.Tests.Controllers
@@ -18,6 +19,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
         private UserController SetupUserController(User user)
         {
             var userRepository = new Mock<IUserRepository>();
+            var userService = new Mock<IUserService>();
             
             userRepository.Setup((u) => u.GetById(1)).Returns(() => user);
             userRepository.Setup((u) => u.GetUserAppointmentsById(1)).Returns(() => user);
@@ -26,7 +28,7 @@ namespace ms_pre_agendamiento.Tests.Controllers
                 cfg.AddProfile<MapperProfile>();
             });
             
-            return new UserController(userRepository.Object, new Mapper(config));
+            return new UserController(userRepository.Object, new Mapper(config), userService.Object);
         }
 
         [Fact]
