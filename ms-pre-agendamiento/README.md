@@ -35,6 +35,10 @@ az login
 ### 3.- Iniciar el servicio.
 Puedes iniciar el servicio usando el CLI de dotnet, con docker, o con kubectl
 
+* Start Local: `$ make up`
+* Check Start Local: `$ curl http://localhost:8080/HealthCheck`
+* Stop Local: `$ make down`
+
 #### 3.1 dotnet CLI
 actualizar appsettings.json con el string de conección a la base de datos
 ```json
