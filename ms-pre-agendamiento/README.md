@@ -3,17 +3,10 @@
 ## Instalación
 
 ### 0.- Dependencias
-* instalar [.Net Core 3.1](https://dot.net/core)
-* ejecutar
-
-- [.Net Core 3.1](https://dot.net/core)
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
-- [Docker](https://docs.docker.com/get-docker/)
-
-### 1.- Clonar el código fuente.
-```sh
-$ https://github.com/aldemars/ms-pre-agendamiento.git
-```
+* [.Net Core 3.1](https://dot.net/core)
+* [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
+* [Docker](https://docs.docker.com/get-docker/)
+* docker-compose
 
 ### 2.- Login en Azure
 ```sh
@@ -33,11 +26,17 @@ az login
 ```
 
 ### 3.- Iniciar el servicio.
-Puedes iniciar el servicio usando el CLI de dotnet, con docker, o con kubectl
 
-* Start Local: `$ make up`
+Para iniciar la aplicación y sus dependencias (servicios) en un single host machine:
+* Start Local:`$ docker-compose up --build -d`
 * Check Start Local: `$ curl http://localhost:8080/HealthCheck`
-* Stop Local: `$ make down`
+* Stop Local: `$ docker-compose down`
+
+Notas:
+- Utilizar `$ make up` y `$ make stop` como shortcuts para iniciar y detener la applicación.
+- `docker-compose logs -f` permite visualizar logs de los contenedores.
+- `docker-compose up db migrations` para disponibilizar localmente solo la base de datos y migraciones.
+- `docker-compose help` para más referencias.
 
 #### 3.1 dotnet CLI
 actualizar appsettings.json con el string de conección a la base de datos
