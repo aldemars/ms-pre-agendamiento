@@ -16,7 +16,7 @@ spec:
             - name: ConnectionStrings__database
               value: "${ConnectionStrings}"
             - name: ConnectionStrings__AppConfig
-                value: "${appConfiguration}"
+              value: "${appConfiguration}"
             - name: AppSettings__Env
               value: "${Env}"  
           ports:
