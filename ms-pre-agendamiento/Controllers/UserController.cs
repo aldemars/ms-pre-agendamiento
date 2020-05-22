@@ -3,6 +3,8 @@ using System.Net.Mime;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.FeatureManagement.Mvc;
+using ms_pre_agendamiento.Configuration;
 using ms_pre_agendamiento.Dto;
 using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Repository;
@@ -15,7 +17,7 @@ namespace ms_pre_agendamiento.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMapper _mapper;
-
+        
         public UserController(IUserRepository userRepository, IMapper mapper, IAppointmentRepository appointmentRepository)
         {
             _userRepository = userRepository;
@@ -45,6 +47,7 @@ namespace ms_pre_agendamiento.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [FeatureGate(FeatureManagement.IsUserAppointmentsFeatureEnabled)]
         public IActionResult GetUserAppointments(int userId)
         {
             var user = _userRepository.GetUserAppointmentsById(userId);

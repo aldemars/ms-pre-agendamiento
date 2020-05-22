@@ -74,7 +74,6 @@ namespace ms_pre_agendamiento.Tests.Repository
             const string expectedID = "1";
             const string expectedName = "myName";
             const string expectedPassword = "superSecure";
-            const int expectedSize = 1;
             
             var command = SetupMock();  
             IUserRepository userRepository =
@@ -87,7 +86,7 @@ namespace ms_pre_agendamiento.Tests.Repository
             Assert.Equal(expectedName, userResult.Name);
             Assert.Equal(expectedPassword, userResult.Password);
             Assert.NotEmpty(userResult.Appointments);
-            Assert.Equal(expectedSize,userResult.Appointments.Count);
+            Assert.Single(userResult.Appointments);
             
 
         }

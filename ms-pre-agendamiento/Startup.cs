@@ -12,10 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ms_pre_agendamiento.Dto;
-using ms_pre_agendamiento.Models;
 using ms_pre_agendamiento.Models.Mappers;
 using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
@@ -74,6 +73,8 @@ namespace ms_pre_agendamiento
             services.AddTransient<IAppointmentRepository, AppointmentRepository>();
             services.AddTransient<IHealthCareFacilityRepository, HealthCareFacilityRepository>();
             
+            services.AddFeatureManagement();
+            
             // configure jwt authentication
             var strKey = Configuration.GetSection("AppSettings")["Secret"];
             var key = Encoding.ASCII.GetBytes(strKey);
@@ -126,6 +127,7 @@ namespace ms_pre_agendamiento
                 app.UseHttpsRedirection();
             }
 
+            app.UseAzureAppConfiguration();
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
             app.UseRouting();
