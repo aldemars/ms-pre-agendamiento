@@ -71,7 +71,7 @@ stages:
             displayName: Get secrets
             inputs:
               script: |
-                sed -i "s/\${AppConfiguration}/$(AppConfiguration)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${AppConfiguration}/$(FeatureFlagsConnection)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
                 echo "app: $(AppConfiguration)"
