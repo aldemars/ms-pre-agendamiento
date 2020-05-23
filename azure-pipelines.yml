@@ -71,8 +71,10 @@ stages:
             displayName: Get secrets
             inputs:
               script: |
-                sed -e "s/\${ConnectionStrings}/$(ConnectionStrings)/" -e "s/\${appConfiguration}/$(appConfiguration)/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -e "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${AppConfiguration}/$(FeatureFlagsConnection)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
+                echo "app: $(AppConfiguration)"
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
