@@ -72,6 +72,7 @@ stages:
             inputs:
               script: |
                 sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${AppConfig}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
