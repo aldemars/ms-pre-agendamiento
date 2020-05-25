@@ -21,10 +21,11 @@ namespace ms_pre_agendamiento
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
                 .ConfigureAppConfiguration((hostingContext, config) => {
                     var settings = config.Build();
-                    if (!String.IsNullOrEmpty(settings["ConnectionStrings:AppConfig"]))
+                    var appConfig = settings["ConnectionStrings:AppConfig"];
+                    if (!String.IsNullOrEmpty(appConfig))
                     {
                         config.AddAzureAppConfiguration(options => {
-                            options.Connect(settings["ConnectionStrings:AppConfig"])
+                            options.Connect(appConfig)
                                 .UseFeatureFlags();
                         });
                     }
