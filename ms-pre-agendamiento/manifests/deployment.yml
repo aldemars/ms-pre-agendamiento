@@ -14,7 +14,7 @@ spec:
           image: preagendamiento.azurecr.io/mspreagendamiento
           env:
             - name: ConnectionStrings__database
-              value: "mock-error-typo-${ConnectionStrings}"
+              value: "${ConnectionStrings}"
             - name: ConnectionStrings__AppConfig
               value: "${AppConfig}"
             - name: AppSettings__Env
