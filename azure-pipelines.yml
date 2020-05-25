@@ -73,10 +73,6 @@ stages:
               script: |
                 sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
-                read -n 5 TEMP1 <<< $(ConnectionStrings)
-                read -n 5 TEMP2 <<< $(AppConfig)
-                echo $TEMP1
-                echo $TEMP2
                 sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
@@ -116,7 +112,7 @@ stages:
               script: |
                 sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
                 sed -i "s/\${Env}/Production/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -i 's~${AppConfig}~'$(AppConfig)'~' $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
