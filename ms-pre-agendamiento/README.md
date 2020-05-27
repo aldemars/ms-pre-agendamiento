@@ -2,13 +2,13 @@
 
 ## Instalación
 
-### 0.- Dependencias
+### 1.- Dependencias
 * [.Net Core 3.1](https://dot.net/core)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
 * [Docker](https://docs.docker.com/get-docker/)
 * docker-compose
 
-### 2.- Login en Azure
+#### 1.1- Login en Azure
 ```sh
 az login [--allow-no-subscriptions]
          [--identity]
@@ -24,6 +24,18 @@ o simplemente el siguiente comando y seguir las instrucciones:
 ```sh
 az login
 ```
+## 2.-  Environment variables
+To validate environment variables execute next [env-vars-check.sh](./etc/scripts/env-vars-check.sh) script:
+
+```
+$ bash ./etc/scripts/env-vars-check.sh
+ ```
+Environment variables Details:
+
+| **Env var**                   | **Mandatory** | **Description** |
+|:------------------------------|:-------------:|:----------------|
+| ConnectionStrings__database   |  YES          | Defines ADO.NET Connection String |
+| ConnectionStrings__AppConfig  |  No           | Defines AppConfiguration Connection string. If not defined app work with local FeatureManager properties  |
 
 ### 3.- Iniciar el servicio.
 
