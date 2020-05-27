@@ -112,10 +112,10 @@ namespace ms_pre_agendamiento
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             _logger = logger;
-            if (env.EnvironmentName != "Test")
-            {
-                CheckDatabaseMigrations();
-            }
+
+            logger.LogInformation("Mark---------------------------------->" + env.EnvironmentName);
+            //CheckDatabaseMigrations();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -124,7 +124,7 @@ namespace ms_pre_agendamiento
 
             if (env.IsProduction() || env.IsStaging())
             {
-                app.UseHttpsRedirection();
+                //app.UseHttpsRedirection();
             }
 
             app.UseAzureAppConfiguration();

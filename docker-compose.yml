@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   db:
-    image: "postgres:latest"
+    image: "postgres:13-alpine"
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
@@ -11,28 +11,24 @@ services:
       - pre-agendamiento-network
 
   migrations:
-    image: flyway/flyway
+    build: ./
     depends_on:
       - db
     networks:
       - pre-agendamiento-network
-    volumes:
-      - type: bind
-        source: ./db/migrations/ 
-        target: /flyway/sql/
     command: -url=jdbc:postgresql://db:5432/postgres -user=admin -password=admin -connectRetries=60 migrate
 
   ms-pre-agendamiento:
-    build: ./
+    build: ./ms-pre-agendamiento/
     depends_on:
       - migrations
     ports:
       - "8080:80"
     environment:
-      ConnectionStrings__database: Server=db;Database=postgres;Port=5432;User Id=admin;Password=admin;Search Path=dev_pre_agendamiento;Ssl Mode=Disable;
+      ConnectionStrings__database: Server=db;Database=postgres;Port=5432;User Id=admin;Password=admin;Search Path=public;Ssl Mode=Disable;
     networks:
       - pre-agendamiento-network
-    
+
 networks:
   pre-agendamiento-network:
     

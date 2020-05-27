@@ -8,11 +8,11 @@ using Xunit;
 
 namespace ms_pre_agendamiento.Tests.Integration
 {
-    public class LoginControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class LoginControllerTest : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
-        public LoginControllerTest(CustomWebApplicationFactory<Startup> factory)
+        public LoginControllerTest(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
@@ -23,7 +23,7 @@ namespace ms_pre_agendamiento.Tests.Integration
             // Arrange
             var client = _factory.CreateClient();
 
-            var payload = "{\"name\": \"genericUser\",\"password\": \"password\"}";
+            var payload = "{\"name\": \"Gonzalo\",\"password\": \"password\"}";
 
             HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
             // Act
