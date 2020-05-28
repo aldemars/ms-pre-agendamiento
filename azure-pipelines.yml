@@ -46,7 +46,13 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          make ut
+          echo "make ut"
+    - task: Bash@3
+      displayName: Integration Tests
+      inputs:
+        targetType: 'inline'
+        script: |
+          make it
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:

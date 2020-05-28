@@ -112,10 +112,7 @@ namespace ms_pre_agendamiento
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             _logger = logger;
-            if (env.EnvironmentName != "Test")
-            {
-                CheckDatabaseMigrations();
-            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

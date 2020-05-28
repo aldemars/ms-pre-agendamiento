@@ -3,14 +3,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
 using ms_pre_agendamiento.Dto;
+using ms_pre_agendamiento.Tests;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace ms_pre_agendamiento.Tests.Integration
+namespace ms_pre_agendamiento.IntegrationTests.Integration
 {
     public class LoginControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Startup> _factory;
+        private readonly CustomWebApplicationFactory<Startup> _factory;
 
         public LoginControllerTest(CustomWebApplicationFactory<Startup> factory)
         {
@@ -23,7 +24,7 @@ namespace ms_pre_agendamiento.Tests.Integration
             // Arrange
             var client = _factory.CreateClient();
 
-            var payload = "{\"name\": \"genericUser\",\"password\": \"password\"}";
+            var payload = "{\"name\": \"Gonzalo\",\"password\": \"password\"}";
 
             HttpContent c = new StringContent(payload, Encoding.UTF8, "application/json");
             // Act

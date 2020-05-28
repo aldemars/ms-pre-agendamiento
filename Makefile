@@ -2,11 +2,15 @@ me-happy:
 		dotnet test
 
 ut:
-	dotnet restore
 	dotnet test ms-pre-agendamiento.Tests
 
+it:
+	docker-compose up --build -d db migrations
+	dotnet test ms-pre-agendamiento.IntegrationTests
+	docker-compose down
+
 up:
-	docker-compose -f ./ms-pre-agendamiento/docker-compose.yml up --build -d
+	docker-compose up --build -d
 
 down:
-	docker-compose -f ./ms-pre-agendamiento/docker-compose.yml down
+	docker-compose down
