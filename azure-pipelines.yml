@@ -46,8 +46,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          pwd
-          ls -la
+          make ut
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
