@@ -114,7 +114,7 @@ namespace ms_pre_agendamiento
             _logger = logger;
             if (env.EnvironmentName != "Test")
             {
-                //CheckDatabaseMigrations();
+                CheckDatabaseMigrations();
             }
             if (env.IsDevelopment())
             {
