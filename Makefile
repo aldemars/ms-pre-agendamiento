@@ -2,6 +2,7 @@ me-happy:
 		dotnet test
 
 ut:
+	dotnet restore
 	dotnet test ms-pre-agendamiento.Tests
 
 up:
