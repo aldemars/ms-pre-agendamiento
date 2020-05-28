@@ -34,11 +34,13 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Bash@3
+      displayName: VM Agent Information
       inputs:
         targetType: 'inline'
         script: |
+          docker --version
           docker-compose --version
-          dotnet --version
+          echo "dotnet version $(dotnet --version)"
     - task: Docker@2
       displayName: Build and push an image to container registry
       inputs:
