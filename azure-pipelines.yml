@@ -46,7 +46,7 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          echo "make ut"
+          make ut
     - task: Bash@3
       displayName: Integration Tests
       inputs:
