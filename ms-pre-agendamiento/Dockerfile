@@ -3,11 +3,14 @@ WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.csproj .
+RUN ls -la
 RUN dotnet restore
 
 # copy everything else and build app
 COPY . .
+RUN ls -la
 RUN dotnet publish -c release -o /app
+RUN ls -la
 
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
