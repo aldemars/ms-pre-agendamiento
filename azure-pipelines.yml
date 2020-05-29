@@ -63,8 +63,8 @@ stages:
         tags: |
           $(tag)
           
-    - publish: ms-pre-agendamiento/manifests
-      artifact: manifests
+    - publish: ms-pre-agendamiento/
+      artifact: ms-pre-agendamiento
 
 - stage: Deploy_Dev
   displayName: Deploy Dev
@@ -98,16 +98,16 @@ stages:
             displayName: Get secrets
             inputs:
               script: |
-                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                sed -i "s/\${Env}/Development/" $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/service.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
@@ -137,16 +137,16 @@ stages:
             displayName: Get secrets
             inputs:
               script: |
-                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -i "s/\${Env}/Production/" $(Pipeline.Workspace)/manifests/deployment.yml
-                sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/manifests/deployment.yml
+                sed -i "s/\${ConnectionStrings}/$(ConnectionStrings)/" $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                sed -i "s/\${Env}/Production/" $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                sed -i 's~${AppConfig}~'"$(AppConfig)"'~g' $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
               manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/deployment.yml
+                $(Pipeline.Workspace)/ms-pre-agendamiento/manifests/service.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
