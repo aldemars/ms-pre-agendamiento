@@ -36,6 +36,7 @@ Environment variables Details:
 |:------------------------------|:-------------:|:----------------|
 | ConnectionStrings__database   |  YES          | Defines ADO.NET Connection String |
 | ConnectionStrings__AppConfig  |  No           | Defines AppConfiguration Connection string. If not defined app work with local FeatureManager properties  |
+| ASPNETCORE_ENVIRONMENT        |  No           | Defines AppConfiguration Environment and defines which appsettings use. By default is Development         |
 
 ### 3.- Iniciar el servicio.
 
