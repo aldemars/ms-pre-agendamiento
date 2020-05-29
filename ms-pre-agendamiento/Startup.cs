@@ -1,5 +1,4 @@
 using System;
-using System.Data.SqlClient;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
@@ -20,7 +19,6 @@ using ms_pre_agendamiento.Repository;
 using ms_pre_agendamiento.Repository.Impl;
 using ms_pre_agendamiento.Service;
 using ms_pre_agendamiento.Service.Impl;
-using Npgsql;
 using Polly;
 
 namespace ms_pre_agendamiento
@@ -135,27 +133,6 @@ namespace ms_pre_agendamiento
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-        }
-
-        private void CheckDatabaseMigrations()
-        {
-            try
-            {
-                var cnx = new NpgsqlConnection(Configuration.GetConnectionString("database"));
-                var location = Configuration.GetSection("AppSettings")["Evolve.Location"];
-                var evolve = new Evolve.Evolve(cnx)
-                {
-                    Locations = new[] {location},
-                    IsEraseDisabled = true,
-                };
-
-                evolve.Migrate();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error applying migrations :: <{ex.Message}>", ex);
-                throw;
-            }
         }
     }
 }

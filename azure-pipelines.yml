@@ -81,6 +81,14 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: Bash@3
+              displayName: Migration
+              inputs:
+                targetType: 'inline'
+                script: |
+                  ls -la
+                  docker run --mount type=bind,source=$(pwd)/ms-pre-agendamiento/db/migrations/,target=/flyway/sql/ flyway/flyway:6.4-alpine \
+                              -url=$(JdbcConnectionString) -connectRetries=60 migrate
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
