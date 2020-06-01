@@ -88,7 +88,7 @@ stages:
               script: |
                 ls -la $(Pipeline.Workspace)
                 ls -la $(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations
-                docker run --rm --mount "type=bind,source=$(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations,target=/flyway/sql" flyway/flyway:6.4-alpine -url=$(JdbcConnectionString) -user=dev@pre-agendamiento -password=$(dbpassword) migrate
+                docker run --rm --mount "type=bind,source=$(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations,target=/flyway/sql" flyway/flyway:6.4-alpine -url=$(JdbcConnectionString) -user=$(dbuser) -password=$(dbpassword) migrate
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
@@ -128,6 +128,14 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: Bash@3
+              displayName: Migration
+              inputs:
+                targetType: 'inline'
+                script: |
+                  ls -la $(Pipeline.Workspace)
+                  ls -la $(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations
+                  docker run --rm --mount "type=bind,source=$(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations,target=/flyway/sql" flyway/flyway:6.4-alpine -url=$(JdbcConnectionString) -user=$(dbuser) -password=$(dbpassword) migrate
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
