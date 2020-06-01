@@ -87,7 +87,8 @@ stages:
               targetType: 'inline'
               script: |
                 ls -la $(Pipeline.Workspace)
-                docker run --mount type=bind,source=$(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations/,target=/flyway/sql/ flyway/flyway:6.4-alpine -url=$(JdbcConnectionString)
+                ls -la $(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations
+                docker run --rm --mount "type=bind,source=$(Pipeline.Workspace)/ms-pre-agendamiento/db/migrations,target=/flyway/sql" flyway/flyway:6.4-alpine -url=$(JdbcConnectionString) -user=dev@pre-agendamiento -password=$(dbpassword) migrate
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
